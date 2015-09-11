@@ -1,7 +1,15 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+user = User.create(username: 'ddog', email: 'ddogrusoy@gmail.com', password: 'password')
+
+questions = [['what is activerecord ?', "someone explain it to me please!!!"], ['how does this git thingie work?', 'I accidently lost all my work, teammates are pissed!!?']]
+
+answers = ["it's for databases and shit", "Go read the documentation noob"]
+
+comments = ['very insigntful answer', 'extremely helpful, thanks']
+
+questions.each do |q|
+  user.questions.create(title: q[0], content: q[1])
+end
+
+answers.each do |a|
+  Question.first.comment.create(content: a)
+end
