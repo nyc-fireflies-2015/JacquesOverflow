@@ -6,4 +6,8 @@ class Answer < ActiveRecord::Base
 	has_many :votes, as: :voteable
 	belongs_to :responder, class_name: :User
 	belongs_to :question
+
+	def rating
+		votes.pluck(:value).reduce(:+)
+	end	
 end
