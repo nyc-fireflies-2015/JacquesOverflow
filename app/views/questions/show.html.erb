@@ -4,11 +4,9 @@
 <%= link_to "Delete Question", question_path(@question), method: :delete %>
 
 <div class='question-upvote'>
-<%= form_for @vote do |f| %>
-  <%= f.hidden_field :voteable_id, value: voteable_id %>
-  <%= f.hidden_field :voteable_type, value: voteable_type %>
+<%= form_for @vote, url: question_votes_path(@question) do |f| %>
   <%= f.hidden_field :value, value: 1 %>
-  <%= f.submit %>
+  <%= f.submit  value: 'UpVote' %>
 <% end %>
 </div>
 

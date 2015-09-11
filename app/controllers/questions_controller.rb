@@ -7,6 +7,8 @@ class QuestionsController < ApplicationController
   end
 
   def show
+
+    @vote = Vote.new
   end
 
   def new
