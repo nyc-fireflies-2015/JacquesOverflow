@@ -1,16 +1,21 @@
 class VotesController < ApplicationController
+
+  def new
+    @vote = Vote.new
+  end
+
   def create
     if params[:questions]
-      @voteable = Question.find_by(vote_params)
-      vote = Vote.new(vote_params)
-      vote.voter_id = current_user
-      if vote.save
+      @question = Question.find_by(id: params[:id])
+      @vote = Vote.new(vote_params)
+      @vote.voter_id = current_user
+      if @vote.save
         redirect_to question_path
       else
         flash[:notice] = 'Your vote has failed'
       end
     elsif params[:answers]
-
+      @answer = Answer.find_by(id: )
     end
 
   end
