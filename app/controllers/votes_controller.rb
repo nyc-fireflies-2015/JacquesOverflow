@@ -13,14 +13,20 @@ class VotesController < ApplicationController
       else
         flash[:notice] = 'Your vote has failed'
       end
-    elsif params[:answers]
-      # @answer = Answer.find_by(id: )
+    elsif params[:answer_id]
+      @answer = Answer.find_by(id: params[:answer_id])
+      @vote = @answer.votes.build(vote_params.merge(voter_id: 1))
+      if @vote.save
+        redirect_to root_path
+      else
+        flash[:notice] = 'Your vote has failed'
+      end
     end
 
   end
 
-  def destroy
-  end
+  # def destroy
+  # end
 
   private
 

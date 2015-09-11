@@ -7,7 +7,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-
+    @answers = Answer.all.where(question_id: params[:id])
     @vote = Vote.new
   end
 
