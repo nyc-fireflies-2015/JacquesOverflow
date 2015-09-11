@@ -1,0 +1,9 @@
+<h1>Ask a Question</h1>
+
+<%= flash[:error] %>
+
+<%= form_for @question do |f| %>
+  Title: <%= f.text_field :title %><br>
+  <%= f.text_area :content %><br>
+  <%= f.submit "Submit" %>
+<% end %>
