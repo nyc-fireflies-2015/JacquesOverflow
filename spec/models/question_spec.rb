@@ -5,8 +5,8 @@ RSpec.describe Question, type: :model do
 	context 'contains valid data' do 	
 	  it { expect(subject).to validate_presence_of(:content) }
 	  it { expect(subject).to validate_presence_of(:title) }
-	  it { expect(subject).to validate_length_of(:content).is_at_most(5000).on(:create) }
-	  it { expect(subject).to validate_length_of(:title).is_at_most(150).on(:create) }
+	  it { expect(subject).to validate_length_of(:content).is_at_most(5000) }
+	  it { expect(subject).to validate_length_of(:title).is_at_most(150) }
 	end
 
 	context 'has correct associations' do 

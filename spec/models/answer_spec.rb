@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Answer, type: :model do
   context 'contains valid data' do 	
 	  it { expect(subject).to validate_presence_of(:content) }
-	  it { expect(subject).to validate_length_of(:content).is_at_most(2000).on(:create) }
+	  it { expect(subject).to validate_length_of(:content).is_at_most(2000) }
 	end
 
 	context 'has correct associations' do 
