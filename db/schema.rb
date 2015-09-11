@@ -17,7 +17,9 @@ ActiveRecord::Schema.define(version: 20150911160547) do
   enable_extension "plpgsql"
 
   create_table "answers", force: true do |t|
-    t.text     "content",    null: false
+    t.text     "content",      null: false
+    t.integer  "responder_id"
+    t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -26,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150911160547) do
     t.text     "content",          null: false
     t.integer  "commentable_id"
     t.string   "commentable_type"
+    t.integer  "commentator_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,6 +38,7 @@ ActiveRecord::Schema.define(version: 20150911160547) do
   create_table "questions", force: true do |t|
     t.string   "title",          limit: 150, null: false
     t.text     "content",                    null: false
+    t.integer  "submitter_id"
     t.integer  "best_answer_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -54,6 +58,7 @@ ActiveRecord::Schema.define(version: 20150911160547) do
     t.integer  "value",         null: false
     t.integer  "voteable_id"
     t.string   "voteable_type"
+    t.integer  "voter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
