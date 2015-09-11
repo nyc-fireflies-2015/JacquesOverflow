@@ -1,0 +1,11 @@
+ <div class="Sign_Form">
+  <h1>Register</h1>
+  <%= form_for(@user) do |f| %>
+    <p> Username:</br> <%= f.text_field :username%> </p>
+    <p> Email:</br> <%= f.text_field :email%> </p>
+    <p> Password:</br> <%= f.password_field :password%></p>
+    <%= f.submit :Register %>
+  <% end %>
+</div>
+
+<!-- flash errors could go here -->
