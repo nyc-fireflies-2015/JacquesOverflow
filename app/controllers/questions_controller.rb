@@ -4,7 +4,7 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @question = Question.find_by(params[:id])
+    @question = Question.find(params[:id])
   end
 
   def new
@@ -18,6 +18,20 @@ class QuestionsController < ApplicationController
     else
       flash[:error] = "Invalid input: must include both title and content."
       redirect_to new_question_path
+    end
+  end
+
+  def edit
+    @question = Question.find(params[:id])
+  end
+
+  def update
+    question = Question.find(params[:id])
+    if question.update_attributes(question_params)
+      redirect_to question_path(question)
+    else
+      flash[:error] = "Invalid input: must include both title and content."
+      redirect_to edit_question_path(question)
     end
   end
 
