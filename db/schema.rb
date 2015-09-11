@@ -41,18 +41,23 @@ ActiveRecord::Schema.define(version: 20150911160547) do
   end
 
   create_table "users", force: true do |t|
-    t.string   "username",        limit: 50,                                              null: false
-    t.string   "email",           limit: 50,                                              null: false
-    t.string   "avatar_url",      limit: 50,                                              null: false
-    t.string   "password_digest",                                                         null: false
-    t.text     "bio",                        default: "This user likes to be mysterious"
+    t.string   "username",        limit: 50, null: false
+    t.string   "email",           limit: 50, null: false
+    t.string   "avatar_url",      limit: 50
+    t.string   "password_digest",            null: false
+    t.text     "bio"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "votes", force: true do |t|
+    t.integer  "value",         null: false
+    t.integer  "voteable_id"
+    t.string   "voteable_type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "votes", ["voteable_id", "voteable_type"], name: "index_votes_on_voteable_id_and_voteable_type", using: :btree
 
 end
