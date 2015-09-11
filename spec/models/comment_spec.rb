@@ -1,5 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+    context 'contains valid data' do 	
+	  it { expect(subject).to validate_presence_of(:content) }
+	  it { expect(subject).to validate_length_of(:content).is_at_most(1500) }
+	end
+
+	context 'has correct associations' do 
+		it { expect(subject).to belong_to(:commentator) }
+	end	
 end
