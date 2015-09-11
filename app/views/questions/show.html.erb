@@ -2,3 +2,34 @@
 <p><%= @question.content %></p>
 <%= link_to "Edit Question", edit_question_path %>
 <%= link_to "Delete Question", question_path(@question), method: :delete %>
+
+<div class='question-upvote'>
+<%= form_for @vote, url: question_votes_path(@question) do |f| %>
+  <%= f.hidden_field :value, value: 1 %>
+  <%= f.submit  value: 'UpVote' %>
+<% end %>
+</div>
+<div class='question-downvote'>
+<%= form_for @vote, url: question_votes_path(@question) do |f| %>
+  <%= f.hidden_field :value, value: -1 %>
+  <%= f.submit  value: 'DownVote' %>
+<% end %>
+</div>
+
+<div class='answers'>
+  <%@answers.each do |ans| %>
+    <%=ans.content %>
+    <div class='answer-upvote'>
+      <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
+        <%= f.hidden_field :value, value: 1 %>
+        <%= f.submit  value: 'UpVote' %>
+      <%end%>
+    </div>
+    <div class='answer-downvotevote'>
+      <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
+        <%= f.hidden_field :value, value: -1 %>
+        <%= f.submit  value: 'DownVote' %>
+      <%end%>
+    </div>
+  <%end%>
+</div>
