@@ -10,6 +10,9 @@ RSpec.describe Question, type: :model do
 	end
 
 	context 'has correct associations' do 
+		it { expect(subject).to have_many(:answers) }
+		it { expect(subject).to have_many(:comments) }
+		it { expect(subject).to have_many(:votes) }
 	end	
 end
 
