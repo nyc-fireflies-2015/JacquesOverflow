@@ -13,6 +13,7 @@ RSpec.describe Question, type: :model do
 		it { expect(subject).to have_many(:answers) }
 		it { expect(subject).to have_many(:comments) }
 		it { expect(subject).to have_many(:votes) }
+		it { expect(subject).to belong_to(:submitter) }
 	end	
 end
 
