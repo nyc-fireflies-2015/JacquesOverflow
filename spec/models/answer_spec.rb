@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Answer, type: :model do
-  	context 'contains valid data' do 	
+  context 'contains valid data' do 	
 	  it { expect(subject).to validate_presence_of(:content) }
 	  it { expect(subject).to validate_length_of(:content) }
 	end
