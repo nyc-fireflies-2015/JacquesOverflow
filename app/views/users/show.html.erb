@@ -11,4 +11,11 @@
     <%end%>
   </ul>
 
+  <h2>User's Questions</h2>
+  <ul>
+    <% @user.questions.each do |question| %>
+    <li><%= question.title %></li>
+    <%end%>
+  </ul>
+
 </div>
