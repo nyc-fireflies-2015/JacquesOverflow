@@ -1,10 +1,10 @@
 # JacquesOverflow
 
 ## Team Baconator
-*Travis Allen
-*Abby De Los Santos
-*Deren Dogrusoy
-*Leah Goldberg
+**Travis Allen
+**Abby De Los Santos
+**Deren Dogrusoy
+**Leah Goldberg
 
 
 ## User Stories
