@@ -3,21 +3,23 @@
 <p class="question-content"><%= question.content %></p>
 
 <% if current_user.asked_question?(question) %>
-	<%= link_to "Edit Question", edit_question_path %>
-	<%= link_to "Delete Question", question_path(question), method: :delete %>
+<%= link_to "Edit Question", edit_question_path %>
+<%= link_to "Delete Question", question_path(question), method: :delete %>
 <% end %>	
 
+<p class="rating">Rating: <%=question.rating%></p>
+
 <% if logged_in? %>
-	<div class='upvote'>
-	  <%= form_for @vote, url: question_votes_path(question) do |f| %>
-	  <%= f.hidden_field :value, value: 1 %>
-	  <%= f.submit  value: 'UpVote' %>
-	  <% end %>
-	</div>
-	<div class='downvote'>
-	  <%= form_for @vote, url: question_votes_path(question) do |f| %>
-	  <%= f.hidden_field :value, value: -1 %>
-	  <%= f.submit  value: 'DownVote' %>
-	  <% end %>
-	</div>
+<div class='upvote'>
+	<%= form_for @vote, url: question_votes_path(question) do |f| %>
+	<%= f.hidden_field :value, value: 1 %>
+	<%= f.submit  value: 'UpVote' %>
+	<% end %>
+</div>
+<div class='downvote'>
+	<%= form_for @vote, url: question_votes_path(question) do |f| %>
+	<%= f.hidden_field :value, value: -1 %>
+	<%= f.submit  value: 'DownVote' %>
+	<% end %>
+</div>
 <% end %>
