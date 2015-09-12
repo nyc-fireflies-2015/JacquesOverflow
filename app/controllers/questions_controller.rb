@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController
+  include ApplicationHelper
+
   before_action :find_question, except: [:index, :new, :create]
   before_action :authenticate_user, except: [:index, :show]
 
