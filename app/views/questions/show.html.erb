@@ -11,50 +11,7 @@
 <div class='answers'>
   <h3>Answers</h3>
   <ul class="answer-list">
-  <%@answers.each do |ans| %>
-  <li><%=ans.responder.username%>: <%=ans.content %>
-  <% if logged_in? %>  
-  <div class="answer-upvote">
-    <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
-    <%= f.hidden_field :value, value: 1 %>
-    <%= f.submit  value: 'UpVote' %>
-    <%end%>
-  </div>
-  <div class='answer-downvotevote'>
-    <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
-    <%= f.hidden_field :value, value: -1 %>
-    <%= f.submit  value: 'DownVote' %>
-    <%end%>
-  </div>
-  <div class="answer-edit">
-    <%= link_to "Edit answer", edit_question_answer_path(@question, ans) %>
-  </div>
-  <div class="answer-delete">
-    <%=form_for ans, url: question_answer_path(@question, ans) do |f| %>
-    <%= hidden_field_tag("_method", "delete") %>
-    <%= f.submit  value: 'Delete answer' %>
-    <%end%>
-  </div>  
-    <%end%>
-  <ul class="answer-comments-list">
-    <%ans.comments.each do |comment| %>
-      <li><%=comment.commentator.username%>: <%=comment.content%></li>
-      <li><%=form_for comment, url: answer_comment_path(ans, comment) do |f| %>
-        <%= hidden_field_tag("_method", "delete") %>
-        <%= f.submit "Delete comment" %>
-        <% end %></li>
-      <% end %>
-            <% if logged_in? %>
-        <p>Add new comment</p>
-        <%= form_for @comment, url: answer_comments_path(ans) do |f| %>
-            <%= text_area(:comment, :content, cols: 30, rows: 5) %>
-  <%= f.submit "Add comment" %>
-        <% end %>
-    <% end %>  
-  </ul>  
-
-</li>
-  <%end%>
+    <%= render @answers %>    
   </ul>
 </div>
 
