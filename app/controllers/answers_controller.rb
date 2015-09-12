@@ -16,8 +16,12 @@ class AnswersController < ApplicationController
 
 	def update
 		@answer.attributes = answer_params
-		flash: {error: 'Failed to Update the Answer!'} unless @answer.save
-		redirect_to question_path(@question)
+		if @answer.save
+			redirect_to question_path(@question)
+		else
+			flash: {error: 'Failed to Update the Answer!'}
+			redirect_to question_path(@question)
+		end
 	end
 
 	def destroy
