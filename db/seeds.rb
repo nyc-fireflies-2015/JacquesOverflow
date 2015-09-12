@@ -14,8 +14,6 @@ jacques = User.create(
 	)
 }
 
-
-
 titles = ['Quel est activerecord? Je ne comprends pas!', 
 	"Comment cela fonctionne-chose git??", 
 	"Comment faire --no-ri --no-rdoc défaut pour gem install?",
@@ -29,25 +27,57 @@ titles = ['Quel est activerecord? Je ne comprends pas!',
 	]
 
 
-"someone explain it to me please!!!"], ['how does this git thingie work?', 'I accidently lost all my work, teammates are pissed!!?']]
+content = "Je ne comprends pas!!!! Expert en utilisabilité des sites web et des logiciels, Jakob Nielsen souligne que l'une des limites de l'utilisation du faux-texte dans la conception de sites web est que ce texte n'étant jamais lu, il ne permet pas de vérifier sa lisibilité effective. La lecture à l'écran étant plus difficile, cet aspect est pourtant essentiel. Nielsen préconise donc l'utilisation de textes représentatifs plutôt que du lorem ipsum. On peut aussi faire remarquer que les formules conçues avec du faux-texte ont tendance à sous-estimer l'espace nécessaire à une titraille immédiatement intelligible, ce qui oblige les rédactions à formuler ensuite des titres simplificateurs, voire inexacts, pour ne pas dépasser l'espace imparti."
 
-answers = ["it's for databases and shit", "Go read the documentation noob"]
+answers = ["It's for databases and shit", 
+	"Go read the documentation noob", 
+	"le mettre en latin est que l'opérateur sait au premier coup d'oeil que la page contenant ces lignes n'est pas valide, et surtout l'attention du client n'est pas dérangée par le contenu, il demeure concentré seulement sur l'aspect graphique",
+	"Il est pour les bases de données",
+	"allez lire la documentation noob"
+	]
 
-comments = ['very insigntful answer', 'extremely helpful, thanks']
+comments = ['very insigntful answer', 
+	'extremely helpful, thanks',
+	"réponse très perspicace",
+	"extrêmement serviable, merci",
+	"vous êtes totalement faux",
+	"ce que l'on vous parle même pas"]
 
-questions.each do |q|
-  User.first.questions.create(title: q[0], content: q[1])
+3.times.with_index do |i| 
+	Question.create(
+		title: titles[i],
+		content: content,
+		submitter: jacques
+	)
 end
 
-vote = User.second.votes.create(value: 1,  voteable_id: Question.first.id)
+titles.each do |title| 
+	Question.create(
+	title: title,
+	content: content,
+	submitter: User.all.sample
+end	
 
-answers.each do |a|
-  Question.first.answers.create(content: a, responder_id: User.second.id)
-end
+Question.all.each do |question|
+	(3..5).to_a.sample.times {
+		question.comments.build(content: comments.sample, commentator: User.all.sample)
+		question.answers.build(content: answers.sample, responder: User.all.sample)
+	}
+end	
 
-comments.each do |c|
-  Question.first.answers.first.comments.create(content: c, commentator: User.second)
-end
+Answer.all.each do |answer|
+	(2..5).to_a.sample.times {
+		answer.comments.build(content: comments.sample, commentator: User.all.sample)
+	}
+end	
+
+5.times {
+	Question.all.sample.answers.build(content: answers.sample, responder: jacques))
+	Question.all.sample.comments.build(content: comments.sample, commentator: jacques))
+	Answer.all.sample.comments.build(content: answers.sample, commentator: jacques))
+}	
+
+# vote = User.second.votes.create(value: 1,  voteable_id: Question.first.id)
 
 
 
