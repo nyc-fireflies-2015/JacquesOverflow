@@ -1,24 +1,4 @@
-<h1><%= @question.title %></h1>
-<p>Posted by <%=@question.submitter.username%> </p>
-<p><%= @question.content %></p>
-<%= link_to "Edit Question", edit_question_path %>
-<%= link_to "Delete Question", question_path(@question), method: :delete %>
-
-<% if logged_in? %>
-<div class='question-upvote'>
-  <%= form_for @vote, url: question_votes_path(@question) do |f| %>
-  <%= f.hidden_field :value, value: 1 %>
-  <%= f.submit  value: 'UpVote' %>
-  <% end %>
-</div>
-<div class='question-downvote'>
-  <%= form_for @vote, url: question_votes_path(@question) do |f| %>
-  <%= f.hidden_field :value, value: -1 %>
-  <%= f.submit  value: 'DownVote' %>
-  <% end %>
-</div>
-<% end %>
-
+<%= render @question %>
 
 <ul class="question-comments-list">
   <% @question.comments.each do |comment| %>
