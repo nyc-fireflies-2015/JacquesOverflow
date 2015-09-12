@@ -10,18 +10,18 @@ class CommentsController < ApplicationController
       @question = Question.find_by(id: params[:question_id])
       comment = @question.comments.build(comment_params.merge(commentator: current_user))
     end
-    flash[:error] = "Comment must be 1500 chars or less." unless comment.save
+    flash: {error: "Comment must be 1500 chars or less." } unless comment.save
     redirect_to question_path(@question)
   end
 
   def destroy
     comment = Comment.find(params[:id])
-    if params[:question_id] 
+    if params[:question_id]
       @question = Question.find_by(id: params[:question_id])
     elsif params[:answer_id]
       @question = Answer.find_by(id: params[:answer_id]).question
-    end    
-    comment.destroy 
+    end
+    comment.destroy
     redirect_to question_path(@question)
   end
 
