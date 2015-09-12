@@ -13,8 +13,7 @@ class CommentsController < ApplicationController
     if comment.save
       redirect_to question_path(@question)
     else
-      flash: {error: "Comment must be 1500 chars or less." }
-      redirect_to question_path(@question)
+      redirect_to question_path(@question), flash: {error: "Comment must be 1500 chars or less." }
     end
   end
 
