@@ -1,35 +1,82 @@
 <h1><%= @question.title %></h1>
+<p>Posted by <%=@question.submitter.username%> </p>
 <p><%= @question.content %></p>
 <%= link_to "Edit Question", edit_question_path %>
 <%= link_to "Delete Question", question_path(@question), method: :delete %>
 
+<% if logged_in? %>
 <div class='question-upvote'>
-<%= form_for @vote, url: question_votes_path(@question) do |f| %>
+  <%= form_for @vote, url: question_votes_path(@question) do |f| %>
   <%= f.hidden_field :value, value: 1 %>
   <%= f.submit  value: 'UpVote' %>
-<% end %>
+  <% end %>
 </div>
 <div class='question-downvote'>
-<%= form_for @vote, url: question_votes_path(@question) do |f| %>
+  <%= form_for @vote, url: question_votes_path(@question) do |f| %>
   <%= f.hidden_field :value, value: -1 %>
   <%= f.submit  value: 'DownVote' %>
-<% end %>
+  <% end %>
 </div>
+<% end %>
+
+<ul class="question-comments-list">
+  <% @question.comments.each do |comment| %>
+    <li><%=comment.commentator.username%>: <%=comment.content%></li>
+  <% end %>
+</ul>  
+
+<% if logged_in? %>
+
+        <p>Add new comment</p>
+        <%= form_for @comment, url: question_comments_path(@question) do |f| %>
+            <%= text_area(:comment, :content, cols: 30, rows: 5) %>
+  <%= f.submit "Add comment" %>
+    <% end %>
+<% end %>    
+
 
 <div class='answers'>
+  <h3>Answers</h3>
+  <ul class="answer-list">
   <%@answers.each do |ans| %>
-    <%=ans.content %>
-    <div class='answer-upvote'>
-      <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
-        <%= f.hidden_field :value, value: 1 %>
-        <%= f.submit  value: 'UpVote' %>
-      <%end%>
-    </div>
-    <div class='answer-downvotevote'>
-      <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
-        <%= f.hidden_field :value, value: -1 %>
-        <%= f.submit  value: 'DownVote' %>
-      <%end%>
-    </div>
+  <li><%=ans.responder.username%>: <%=ans.content %>
+  <% if logged_in? %>  
+  <div class="answer-upvote">
+    <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
+    <%= f.hidden_field :value, value: 1 %>
+    <%= f.submit  value: 'UpVote' %>
+    <%end%>
+  </div>
+  <div class='answer-downvotevote'>
+    <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
+    <%= f.hidden_field :value, value: -1 %>
+    <%= f.submit  value: 'DownVote' %>
+    <%end%>
+    <%end%>
+  </div>
+  <ul class="answer-comments-list">
+    <%ans.comments.each do |comment| %>
+      <li><%=comment.commentator.username%>: <%=comment.content%></li>
+      <% end %>
+            <% if logged_in? %>
+        <p>Add new comment</p>
+        <%= form_for @comment, url: answer_comments_path(ans) do |f| %>
+            <%= text_area(:comment, :content, cols: 30, rows: 5) %>
+  <%= f.submit "Add comment" %>
+        <% end %>
+    <% end %>  
+  </ul>  
+</li>
   <%end%>
+  </ul>
 </div>
+
+<% if logged_in? %>
+<div class="new-answer">
+  <h3> Submit an answer </h3>
+  <%= form_for @answer, url: question_answers_path(@question) do |f| %>
+  <%= text_area(:answer, :content, cols: 30, rows: 10) %>
+  <%= f.submit "Add answer" %>
+  <% end %>
+</div>  
+<% end %>

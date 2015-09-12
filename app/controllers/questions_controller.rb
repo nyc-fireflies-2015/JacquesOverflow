@@ -7,8 +7,10 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answers = Answer.all.where(question_id: params[:id])
+    @answers = @question.answers.includes(:comments)
     @vote = Vote.new
+    @answer = Answer.new
+    @comment = Comment.new
   end
 
   def new
@@ -16,7 +18,7 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    question = Question.new(question_params.merge(submitter_id: current_user.id))
+    question = Question.new(question_params.merge(submitter: current_user))
     if question.save
       redirect_to root_path
     else
