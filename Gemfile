@@ -32,7 +32,7 @@ gem 'validates_email_format_of'
 gem 'faker'
 gem 'rails_12factor'
 
-group :test, :development do 
+group :test, :development do
 	gem 'pry'
 	gem 'factory_girl_rails'
 	gem 'launchy'
@@ -40,7 +40,7 @@ group :test, :development do
 	gem 'capybara'
 	gem 'database_cleaner'
 	gem 'shoulda-matchers'
-end	
+end
 
 # Use unicorn as the app server
 # gem 'unicorn'
