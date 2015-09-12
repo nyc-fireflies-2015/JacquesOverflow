@@ -14,7 +14,15 @@ class User < ActiveRecord::Base
 	has_many :comments, foreign_key: :commentator_id
 	has_many :votes, foreign_key: :voter_id
 
-	def asked_question?(question)
+	def posted_question?(question)
 		id == question.submitter.id
+	end	
+
+	def posted_answer?(answer)
+		id == answer.responder.id
+	end	
+
+	def posted_comment?(comment)
+		id == comment.commentator.id
 	end	
 end

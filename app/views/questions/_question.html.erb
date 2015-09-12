@@ -2,7 +2,7 @@
 <h3 class="subtitle">Posted by <%=question.submitter.username%> </h3>
 <p class="question-content"><%= question.content %></p>
 
-<% if current_user.asked_question?(question) %>
+<% if current_user.posted_question?(question) %>
 <%= link_to "Edit Question", edit_question_path %>
 <%= link_to "Delete Question", question_path(question), method: :delete %>
 <% end %>	
