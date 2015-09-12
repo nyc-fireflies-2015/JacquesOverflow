@@ -33,11 +33,7 @@
   <ul class="answer-comments-list">
     <%= render partial:"comments/answer_comment", collection:answer.comments, as: :comment, locals: {answer: answer} %>
     <% if logged_in? %>
-    <p>Add new comment</p>
-    <%= form_for @comment, url: answer_comments_path(answer) do |f| %>
-    <%= text_area(:comment, :content, cols: 30, rows: 5) %>
-    <%= f.submit "Add comment" %>
-    <% end %>
+      <%= render partial:"comments/answer_new", object: @comment, locals: {answer: answer} %>
     <% end %>
   </ul>  
 </li>  

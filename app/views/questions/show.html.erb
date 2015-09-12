@@ -10,19 +10,13 @@
   <%= render partial:"comments/new", object: @comment %>
 <% end %>
 
-<div class='answers'>
-  <h3>Answers</h3>
+<div class="answers">
+  <h3 class="subtitle">Answers</h3>
   <ul class="answer-list">
     <%= render @answers %>    
   </ul>
 </div>
 
 <% if logged_in? %>
-<div class="new-answer">
-  <h3> Submit an answer </h3>
-  <%= form_for @answer, url: question_answers_path(@question) do |f| %>
-  <%= text_area(:answer, :content, cols: 30, rows: 10) %>
-  <%= f.submit "Add answer" %>
-  <% end %>
-</div>  
+  <%= render partial:"answers/new", object: @answer %>
 <% end %>
