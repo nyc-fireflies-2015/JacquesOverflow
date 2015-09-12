@@ -13,4 +13,8 @@ class User < ActiveRecord::Base
 	has_many :answers, foreign_key: :responder_id
 	has_many :comments, foreign_key: :commentator_id
 	has_many :votes, foreign_key: :voter_id
+
+	def asked_question?(question)
+		id == question.submitter.id
+	end	
 end
