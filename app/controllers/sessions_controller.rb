@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
       log_in(user)
       redirect_to root_url, notice: "Login Successful!"
     else
-      redirect_to login_path, flash: {error: 'Login Failed!'}
+      redirect_to login_path, flash: {error: 'Username/Password combination is incorrect'}
     end
   end
 
