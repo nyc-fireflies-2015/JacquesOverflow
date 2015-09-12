@@ -23,8 +23,7 @@ class QuestionsController < ApplicationController
     if question.save
       redirect_to root_path
     else
-      flash[:error] = "Invalid input: must include both title and content."
-      redirect_to new_question_path
+      redirect_to new_question_path, flash: {error: "Invalid input: must include both title and content."}
     end
   end
 
@@ -35,8 +34,7 @@ class QuestionsController < ApplicationController
     if @question.update_attributes(question_params)
       redirect_to question_path(@question)
     else
-      flash[:error] = "Invalid input: must include both title and content."
-      redirect_to edit_question_path(@question)
+      redirect_to edit_question_path(@question), flash: {error: "Invalid input: must include both title and content." }
     end
   end
 

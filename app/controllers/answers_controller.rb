@@ -7,16 +7,16 @@ class AnswersController < ApplicationController
 	def create
 		@question = Question.find_by(id: params[:question_id])
 		answer = @question.answers.build(answer_params.merge(responder: current_user))
-		flash[:errors] = answer.errors.full_messages unless @answer.save
+		flash: {error: 'Failed to Submit the Answer!'} unless @answer.save
 		redirect_to question_path(@question)
 	end
 
 	def edit
-	end	
-	
+	end
+
 	def update
 		@answer.attributes = answer_params
-		flash[:errors] = @answer.errors.full_messages unless @answer.save
+		flash: {error: 'Failed to Update the Answer!'} unless @answer.save
 		redirect_to question_path(@question)
 	end
 
@@ -29,21 +29,21 @@ class AnswersController < ApplicationController
 
 	def find_answer
 		@answer = Answer.find_by(id: params[:id])
-	end	
+	end
 
 	def find_question
 		@question = @answer.question
-	end	
+	end
 
 	def answer_params
 		params.require(:answer).permit(:content)
-	end	
+	end
 
 	def authenticate_user
 		redirect_to question_path(@question) if !current_user
-	end	
+	end
 
 	def authorize_user
 		redirect_to question_path(@question) if current_user!=@answer.responder
-	end	
-end	
+	end
+end

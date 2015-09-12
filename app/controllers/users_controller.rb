@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   def create
     user = User.new(user_params)
     if user.save
-      # log_in(user)
-      redirect_to root_path
+      log_in(user)
+      redirect_to root_path, notice: "Account Has Created!!"
     else
-      render 'new'
+      redirect_to register_path, flash: {error: 'Registration Failed!'}
     end
   end
 
@@ -26,9 +26,8 @@ class UsersController < ApplicationController
     if @user.update_attributes(user_params)
       redirect_to profile_path
     else
-      #error message
-      Rails.logger.info(@user.errors.messages.inspect)
-      render 'edit'
+
+      redirect_to edit_user(@user)
     end
   end
 
