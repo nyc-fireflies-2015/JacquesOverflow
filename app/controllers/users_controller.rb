@@ -21,9 +21,19 @@ class UsersController < ApplicationController
     @user = User.find_by(id: current_user.id)
   end
 
+  def update
+    @user = current_user
+    if @user.update_attributes(user_params)
+      redirect_to profile_path
+    else
+      #error message
+      render 'edit'
+    end
+  end
+
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :bio, :avatar_url)
   end
 end
