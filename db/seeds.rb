@@ -5,7 +5,7 @@ jacques = User.create(
 	bio: "je suis Jacques",
 	avatar_url: Faker::Avatar.image)
 
-100.times { User.create(
+25.times { User.create(
 	username: Faker::Internet.user_name,
 	email: Faker::Internet.email,
 	bio: "Cet utilisateur aime à être mystérieux",
@@ -25,7 +25,6 @@ titles = ['Quel est activerecord? Je ne comprends pas!',
 	"Ruby: qu'est-ce que w% (array) signifie?",
 	"Pas de matches de route \"/users/sign_out\" concevoir des rails 3"
 	]
-
 
 content = "Je ne comprends pas!!!! Expert en utilisabilité des sites web et des logiciels, Jakob Nielsen souligne que l'une des limites de l'utilisation du faux-texte dans la conception de sites web est que ce texte n'étant jamais lu, il ne permet pas de vérifier sa lisibilité effective. La lecture à l'écran étant plus difficile, cet aspect est pourtant essentiel. Nielsen préconise donc l'utilisation de textes représentatifs plutôt que du lorem ipsum. On peut aussi faire remarquer que les formules conçues avec du faux-texte ont tendance à sous-estimer l'espace nécessaire à une titraille immédiatement intelligible, ce qui oblige les rédactions à formuler ensuite des titres simplificateurs, voire inexacts, pour ne pas dépasser l'espace imparti."
 
@@ -55,29 +54,45 @@ titles.each do |title|
 	Question.create(
 	title: title,
 	content: content,
-	submitter: User.all.sample
+	submitter: User.all.sample)
 end	
 
 Question.all.each do |question|
 	(3..5).to_a.sample.times {
-		question.comments.build(content: comments.sample, commentator: User.all.sample)
-		question.answers.build(content: answers.sample, responder: User.all.sample)
+		question.comments.create(content: comments.sample, commentator: User.all.sample)
+		question.answers.create(content: answers.sample, responder: User.all.sample)
 	}
 end	
 
 Answer.all.each do |answer|
 	(2..5).to_a.sample.times {
-		answer.comments.build(content: comments.sample, commentator: User.all.sample)
+		answer.comments.create(content: comments.sample, commentator: User.all.sample)
 	}
 end	
 
 5.times {
-	Question.all.sample.answers.build(content: answers.sample, responder: jacques))
-	Question.all.sample.comments.build(content: comments.sample, commentator: jacques))
-	Answer.all.sample.comments.build(content: answers.sample, commentator: jacques))
+	Question.all.sample.answers.create(content: answers.sample, responder: jacques)
+	Question.all.sample.comments.create(content: comments.sample, commentator: jacques)
+	Answer.all.sample.comments.create(content: comments.sample, commentator: jacques)
 }	
 
-# vote = User.second.votes.create(value: 1,  voteable_id: Question.first.id)
+Question.all.each do |question|
+	(5..50).to_a.sample.times {
+		question.votes.create(value: 1, voter: User.all.sample)
+	}
+	(1..10).to_a.sample.times {
+		question.votes.create(value: -1, voter: User.all.sample)
+	}
+end
+
+Answer.all.each do |answer|
+	(5..50).to_a.sample.times {
+		answer.votes.create(value: 1, voter: User.all.sample)
+	}
+	(1..10).to_a.sample.times {
+		answer.votes.create(value: -1, voter: User.all.sample)
+	}
+end	
 
 
 
