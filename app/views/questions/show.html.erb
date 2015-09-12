@@ -23,6 +23,10 @@
 <ul class="question-comments-list">
   <% @question.comments.each do |comment| %>
     <li><%=comment.commentator.username%>: <%=comment.content%></li>
+    <li><%=form_for comment, url: question_comment_path(@question, comment) do |f| %>
+        <%= hidden_field_tag("_method", "delete") %>
+        <%= f.submit "Delete comment" %>
+        <% end %></li>
   <% end %>
 </ul>  
 
