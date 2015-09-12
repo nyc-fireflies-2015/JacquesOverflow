@@ -19,6 +19,7 @@
 </div>
 <% end %>
 
+
 <ul class="question-comments-list">
   <% @question.comments.each do |comment| %>
     <li><%=comment.commentator.username%>: <%=comment.content%></li>
@@ -52,8 +53,17 @@
     <%= f.hidden_field :value, value: -1 %>
     <%= f.submit  value: 'DownVote' %>
     <%end%>
-    <%end%>
   </div>
+  <div class="answer-edit">
+    <%= link_to "Edit answer", edit_question_answer_path(@question, ans) %>
+  </div>
+  <div class="answer-delete">
+    <%=form_for ans, url: question_answer_path(@question, ans) do |f| %>
+    <%= hidden_field_tag("_method", "delete") %>
+    <%= f.submit  value: 'Delete answer' %>
+    <%end%>
+  </div>  
+    <%end%>
   <ul class="answer-comments-list">
     <%ans.comments.each do |comment| %>
       <li><%=comment.commentator.username%>: <%=comment.content%></li>
@@ -66,6 +76,7 @@
         <% end %>
     <% end %>  
   </ul>  
+
 </li>
   <%end%>
   </ul>
