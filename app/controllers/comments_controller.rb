@@ -8,7 +8,7 @@ class CommentsController < ApplicationController
       comment = answer.comments.build(comment_params.merge(commentator: current_user))
     elsif params[:question_id]
       @question = Question.find_by(id: params[:question_id])
-      comment = question.comments.build(comment_params.merge(commentator: current_user))
+      comment = @question.comments.build(comment_params.merge(commentator: current_user))
     end
     flash[:error] = "Comment must be 1500 chars or less." unless comment.save
     redirect_to question_path(@question)
