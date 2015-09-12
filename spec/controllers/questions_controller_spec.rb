@@ -37,6 +37,20 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe "GET #edit" do
+    it "renders the :edit view when logged in" do
+      log_in(user)
+      get :edit, id: question
+      expect(response).to render_template :edit
+    end
+
+    it "redirects to root if not logged in" do
+      get :edit, id: question
+      expect(response).to redirect_to root_path
+    end
+  end
+
+
   describe "PUT #update" do
     before :each do
       @question = FactoryGirl.create(:question, title: "Title", content: "content")
