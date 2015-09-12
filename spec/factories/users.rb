@@ -6,16 +6,19 @@ FactoryGirl.define do
     bio "This user likes to be mysterious"
     password "supersecure"
 
-    factory :unique_username_user do 
+    factory :unique_username_user do
     	username nil
     	password nil
-    end	
+    end
 
-    factory :unique_email_user do 
+    factory :unique_email_user do
     	email nil
     	password nil
-    end	
+    end
 
+    factory(:invalid_user) do
+        username nil
+        email nil
+    end
   end
-
 end
