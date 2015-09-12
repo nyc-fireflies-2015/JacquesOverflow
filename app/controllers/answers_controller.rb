@@ -8,18 +8,18 @@ class AnswersController < ApplicationController
 		@question = Question.find_by(id: params[:question_id])
 		answer = @question.answers.build(answer_params.merge(responder: current_user))
 		flash[:errors] = answer.errors.full_messages unless answer.save
-		redirect_to question(@question)
+		redirect_to question_path(@question)
 	end
 	
 	def update
 		answer.attributes = answer_params
 		flash[:errors] = answer.errors.full_messages unless answer.save
-		redirect_to question(@question)
+		redirect_to question_path(@question)
 	end
 
 	def destroy
 		answer.destroy
-		redirect_to question(@question)
+		redirect_to question_path(@question)
 	end
 
 	private
