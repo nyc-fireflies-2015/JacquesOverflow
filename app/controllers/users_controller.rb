@@ -27,6 +27,7 @@ class UsersController < ApplicationController
       redirect_to profile_path
     else
       #error message
+      Rails.logger.info(@user.errors.messages.inspect)
       render 'edit'
     end
   end
