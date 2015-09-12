@@ -3,33 +3,51 @@
 <%= link_to "Edit Question", edit_question_path %>
 <%= link_to "Delete Question", question_path(@question), method: :delete %>
 
+<% if logged_in? %>
 <div class='question-upvote'>
-<%= form_for @vote, url: question_votes_path(@question) do |f| %>
+  <%= form_for @vote, url: question_votes_path(@question) do |f| %>
   <%= f.hidden_field :value, value: 1 %>
   <%= f.submit  value: 'UpVote' %>
-<% end %>
+  <% end %>
 </div>
 <div class='question-downvote'>
-<%= form_for @vote, url: question_votes_path(@question) do |f| %>
+  <%= form_for @vote, url: question_votes_path(@question) do |f| %>
   <%= f.hidden_field :value, value: -1 %>
   <%= f.submit  value: 'DownVote' %>
-<% end %>
+  <% end %>
 </div>
+<% end %>
 
 <div class='answers'>
+  <h3>Answers</h3>
+  <ul class="answer-list">
   <%@answers.each do |ans| %>
-    <%=ans.content %>
-    <div class='answer-upvote'>
-      <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
-        <%= f.hidden_field :value, value: 1 %>
-        <%= f.submit  value: 'UpVote' %>
-      <%end%>
-    </div>
-    <div class='answer-downvotevote'>
-      <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
-        <%= f.hidden_field :value, value: -1 %>
-        <%= f.submit  value: 'DownVote' %>
-      <%end%>
-    </div>
+  <li><%=ans.content %>
+  <% if logged_in? %>  
+  <div class="answer-upvote">
+    <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
+    <%= f.hidden_field :value, value: 1 %>
+    <%= f.submit  value: 'UpVote' %>
+    <%end%>
+  </div>
+  <div class='answer-downvotevote'>
+    <%=form_for @vote, url: answer_votes_path(ans) do |f| %>
+    <%= f.hidden_field :value, value: -1 %>
+    <%= f.submit  value: 'DownVote' %>
+    <%end%>
+    <%end%>
+  </div>
+</li>
   <%end%>
+  </ul>
 </div>
+
+<% if logged_in? %>
+<div class="new-answer">
+  <h3> Submit an answer </h3>
+  <%= form_for @answer, url: question_answers_path(@question) do |f| %>
+  <%= text_area(:answer, :content, cols: 30, rows: 10) %>
+  <%= f.submit "Add answer" %>
+  <% end %>
+</div>  
+<% end %>
