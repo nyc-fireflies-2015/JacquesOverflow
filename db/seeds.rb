@@ -26,7 +26,12 @@ titles = ['Quel est activerecord? Je ne comprends pas!',
 	"Pas de matches de route \"/users/sign_out\" concevoir des rails 3"
 	]
 
-content = "Je ne comprends pas!!!! Expert en utilisabilité des sites web et des logiciels, Jakob Nielsen souligne que l'une des limites de l'utilisation du faux-texte dans la conception de sites web est que ce texte n'étant jamais lu, il ne permet pas de vérifier sa lisibilité effective. La lecture à l'écran étant plus difficile, cet aspect est pourtant essentiel. Nielsen préconise donc l'utilisation de textes représentatifs plutôt que du lorem ipsum. On peut aussi faire remarquer que les formules conçues avec du faux-texte ont tendance à sous-estimer l'espace nécessaire à une titraille immédiatement intelligible, ce qui oblige les rédactions à formuler ensuite des titres simplificateurs, voire inexacts, pour ne pas dépasser l'espace imparti."
+content = ["Je ne comprends pas!!!! Expert en utilisabilité des sites web et des logiciels, du faux-texte dans.",
+	"I don't understand.  la conception de sites web est que ce texte n'étant jamais lu. ",
+	"Please help! il ne permet pas de.",
+	"expliquez-moi ce qui se passe!  vérifier sa lisibilité effective. La lecture à l'écran étant plus difficile, cet aspect est pourtant essentiel. Nielsen préconise donc l'utilisation de textes.",
+	"je veux apprendre à coder.  représentatifs plutôt que du lorem ipsum. On peut aussi faire remarquer que les formules conçues avec du faux-texte ont tendance à sous-estimer l'espace.",
+	"i aime ruby mais je ne comprends pas. nécessaire à une titraille immédiatement intelligible, ce qui oblige les rédactions à formuler ensuite des titres simplificateurs, voire inexacts, pour ne pas dépasser l'espace imparti."]
 
 answers = ["It's for databases and shit", 
 	"Go read the documentation noob", 
@@ -45,7 +50,7 @@ comments = ['very insigntful answer',
 3.times.with_index do |i| 
 	Question.create(
 		title: titles[i],
-		content: content,
+		content: content.sample,
 		submitter: jacques
 	)
 end
@@ -53,7 +58,7 @@ end
 titles.each do |title| 
 	Question.create(
 	title: title,
-	content: content,
+	content: content.sample,
 	submitter: User.all.sample)
 end	
 
@@ -86,10 +91,10 @@ Question.all.each do |question|
 end
 
 Answer.all.each do |answer|
-	(5..50).to_a.sample.times {
+	(5..10).to_a.sample.times {
 		answer.votes.create(value: 1, voter: User.all.sample)
 	}
-	(1..10).to_a.sample.times {
+	(1..5).to_a.sample.times {
 		answer.votes.create(value: -1, voter: User.all.sample)
 	}
 end	
