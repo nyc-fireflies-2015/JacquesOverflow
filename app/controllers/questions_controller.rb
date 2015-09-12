@@ -7,9 +7,10 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answers = Answer.all.where(question_id: params[:id])
+    @answers = @question.answers.includes(:comments)
     @vote = Vote.new
     @answer = Answer.new
+    @comment = Comment.new
   end
 
   def new
