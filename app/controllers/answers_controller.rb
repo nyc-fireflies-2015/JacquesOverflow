@@ -40,10 +40,10 @@ class AnswersController < ApplicationController
 	end	
 
 	def authenticate_user
-		redirect_to question(@question) if !current_user
+		redirect_to question_path(@question) if !current_user
 	end	
 
 	def authorize_user
-		redirect_to question(@question) if current_user!=@answer.responder
+		redirect_to question_path(@question) if current_user!=@answer.responder
 	end	
 end	

@@ -67,6 +67,10 @@
   <ul class="answer-comments-list">
     <%ans.comments.each do |comment| %>
       <li><%=comment.commentator.username%>: <%=comment.content%></li>
+      <li><%=form_for comment, url: answer_comment_path(ans, comment) do |f| %>
+        <%= hidden_field_tag("_method", "delete") %>
+        <%= f.submit "Delete comment" %>
+        <% end %></li>
       <% end %>
             <% if logged_in? %>
         <p>Add new comment</p>
