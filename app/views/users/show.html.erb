@@ -1,13 +1,23 @@
 <div class="container">
-  <%= @user.avatar_url %>
+  <div id="user-profile">
+    <div class="avatar">
+      <%= @user.avatar_url %>
+    </div>
 
-  <h1><%= @user.username %>'s Profile </h1>
-  <hr>
+    <div class="content">
+      <h1><%= @user.username %>'s Profile</h1>
+      <p><%= link_to "Edit Profile", edit_user_path if @user.id == current_user.id%></p>
+      <hr>
+
+    </div>
+  </div>
+
+
 
   <h2>User's Answers</h2>
   <ul>
     <% @user.answers.each do |answer| %>
-    <li><%= answer %></li>
+    <li><%= answer.content %></li>
     <%end%>
   </ul>
 
