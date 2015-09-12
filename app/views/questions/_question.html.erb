@@ -1,0 +1,25 @@
+<h1 class="title"><%= question.title %></h1>
+<h3 class="subtitle">Posted by <%=question.submitter.username%> </h3>
+<p class="question-content"><%= question.content %></p>
+
+<% if current_user.posted_question?(question) %>
+<%= link_to "Edit Question", edit_question_path %>
+<%= link_to "Delete Question", question_path(question), method: :delete %>
+<% end %>	
+
+<p class="rating">Rating: <%=question.rating%></p>
+
+<% if logged_in? %>
+<div class='upvote'>
+	<%= form_for @vote, url: question_votes_path(question) do |f| %>
+	<%= f.hidden_field :value, value: 1 %>
+	<%= f.submit  value: 'UpVote' %>
+	<% end %>
+</div>
+<div class='downvote'>
+	<%= form_for @vote, url: question_votes_path(question) do |f| %>
+	<%= f.hidden_field :value, value: -1 %>
+	<%= f.submit  value: 'DownVote' %>
+	<% end %>
+</div>
+<% end %>

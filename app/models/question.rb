@@ -10,6 +10,6 @@ class Question < ActiveRecord::Base
 	has_many :votes, as: :voteable
 
 	def rating
-		votes.pluck(:value).reduce(:+)
+		votes.pluck(:value).reduce(:+) || 0
 	end	
 end
