@@ -1,21 +1,40 @@
 <div class="container">
-  <%= @user.avatar_url %>
+  <div id="user-profile">
+    <div class="avatar">
+      <img src="<%= @user.avatar_url %>" />
+    </div>
 
-  <h1><%= @user.username %>'s Profile </h1>
-  <hr>
+    <div class="user-bio">
+      <h1><%= @user.username %>'s Profile</h1>
+      <p><%= @user.bio %></p>
+      <p><%= link_to "Edit Profile", edit_user_path if @user.id == current_user.id%></p>
+      <hr>
 
-  <h2>User's Answers</h2>
-  <ul>
-    <% @user.answers.each do |answer| %>
-    <li><%= answer %></li>
-    <%end%>
-  </ul>
 
-  <h2>User's Questions</h2>
-  <ul>
-    <% @user.questions.each do |question| %>
-    <li><%= question.title %></li>
-    <%end%>
-  </ul>
+    </div>
+  </div>
+
+  <div class="user-activity">
+    <div class="user-questions">
+      <h2><%= @user.username %>'s Questions</h2>
+        <ul>
+          <% @user.questions.each do |question| %>
+          <li><%= link_to question.title, question_path %></li>
+          <%end%>
+        </ul>
+    </div>
+
+    <div class="user-answers">
+      <h2><%= @user.username %>'s Answers</h2>
+      <ul>
+        <% @user.answers.each do |answer| %>
+        <li><%= link_to answer.question.title, question_path %></li>
+        <ul><li><%= answer.content %></li></ul>
+        <%end%>
+      </ul>
+    </div>
+</div>
+
+
 
 </div>

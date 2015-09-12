@@ -1,0 +1,11 @@
+<li><%=comment.commentator.username%>: <%=comment.content%></li>
+
+<% if current_user.posted_comment?(comment) %>
+	<li><%=form_for comment, url: answer_comment_path(answer, comment) do |f| %>
+		<%= hidden_field_tag("_method", "delete") %>
+		<%= f.submit "Delete comment" %>
+		<% end %>
+	</li>
+<% end %>	
+
+

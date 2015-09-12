@@ -8,6 +8,6 @@ class Answer < ActiveRecord::Base
 	belongs_to :question
 
 	def rating
-		votes.pluck(:value).reduce(:+)
+		votes.pluck(:value).reduce(:+) || 0
 	end	
 end

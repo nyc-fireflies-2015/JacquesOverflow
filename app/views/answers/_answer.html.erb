@@ -1,0 +1,39 @@
+<li><%=answer.responder.username%>: <%=answer.content %></li>
+
+<li>Rating: <%=answer.rating%> 
+
+  <% if logged_in? %>  
+    <div class="upvote">
+      <%=form_for @vote, url: answer_votes_path(answer) do |f| %>
+      <%= f.hidden_field :value, value: 1 %>
+      <%= f.submit 'UpVote' %>
+      <%end%>
+    </div>
+
+    <div class='downvote'>
+      <%=form_for @vote, url: answer_votes_path(answer) do |f| %>
+      <%= f.hidden_field :value, value: -1 %>
+      <%= f.submit 'DownVote' %>
+      <%end%>
+    </div>
+  <% end %>
+
+  <% if current_user.posted_answer?(answer) %>  
+    <div class="answer-edit">
+      <%= link_to "Edit answer", edit_question_answer_path(@question, answer) %>
+    </div>
+    <div class="answer-delete">
+      <%=form_for answer, url: question_answer_path(@question, answer) do |f| %>
+      <%= hidden_field_tag("_method", "delete") %>
+      <%= f.submit 'Delete answer' %>
+      <%end%>
+    </div>  
+  <%end%>
+
+  <ul class="answer-comments-list">
+    <%= render partial:"comments/answer_comment", collection:answer.comments, as: :comment, locals: {answer: answer} %>
+    <% if logged_in? %>
+      <%= render partial:"comments/answer_new", object: @comment, locals: {answer: answer} %>
+    <% end %>
+  </ul>  
+</li>  

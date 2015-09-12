@@ -1,0 +1,5 @@
+<p>Add new comment</p>
+	<%= form_for @comment, url: question_comments_path(@question) do |f| %>
+	<%= text_area(:comment, :content, cols: 30, rows: 5) %>
+	<%= f.submit "Add comment" %>
+<% end %>
