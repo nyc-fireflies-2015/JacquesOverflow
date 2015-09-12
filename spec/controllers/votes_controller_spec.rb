@@ -6,7 +6,29 @@ RSpec.describe VotesController, type: :controller do
     @user = FactoryGirl.create(:user)
     @vote = Vote.new(value: 1)
     @vote_attributes = @vote.attributes
+  end
 
+  def create_question_downvote
+    @question = FactoryGirl.create(:question)
+    @user = FactoryGirl.create(:user)
+    @vote = Vote.new(value: -1)
+    @vote_attributes = @vote.attributes
+  end
+
+  def create_answer_upvote
+    @question = FactoryGirl.create(:question)
+    @answer = @question.answers.create(content: "This is my answer")
+    @user = FactoryGirl.create(:user)
+    @vote = Vote.new(value: 1)
+    @vote_attributes = @vote.attributes
+  end
+
+  def create_answer_downvote
+    @question = FactoryGirl.create(:question)
+    @answer = @question.answers.create(content: "This is my answer")
+    @user = FactoryGirl.create(:user)
+    @vote = Vote.new(value: -1)
+    @vote_attributes = @vote.attributes
   end
 
   describe "#new" do
@@ -17,12 +39,49 @@ RSpec.describe VotesController, type: :controller do
     context 'with question params' do
       it 'adds a vote to a question' do
         create_question_upvote
+        expect{post :create, question_id: @question.id, vote: @vote_attributes}.to change{@question.votes.count}.by(1)
+      end
+
+      it 'increases question rating by one if upvote' do
+        create_question_upvote
+        expect{post :create, question_id: @question.id, vote: @vote_attributes}.to change{@question.rating}.from(nil).to(1)
+      end
+
+      it 'decreases question rating by one if downvote' do
+        create_question_downvote
+        expect{post :create, question_id: @question.id, vote: @vote_attributes}.to change{@question.rating}.from(nil).to(-1)
+      end
+
+
+      it 'redirects to question after upvote' do
+        create_question_upvote
         post :create, question_id: @question.id, vote: @vote_attributes
-        expect(@question.votes.count).to eq(1)
+        expect(response).to redirect_to(question_path(@question))
       end
     end
 
     context 'with answer params' do
+      it 'adds a vote to an answer' do
+        create_answer_upvote
+        expect{post :create, answer_id: @answer.id, vote: @vote_attributes}.to change{@answer.votes.count}.by(1)
+      end
+
+      it 'increases answer rating by one if upvote' do
+        create_answer_upvote
+        expect{post :create, answer_id: @answer.id, vote: @vote_attributes}.to change{@answer.rating}.from(nil).to(1)
+      end
+
+      it 'decreases answer rating by one if downvote' do
+        create_answer_downvote
+        expect{post :create, answer_id: @answer.id, vote: @vote_attributes}.to change{@answer.rating}.from(nil).to(-1)
+      end
+
+
+      it 'redirects to question after vote' do
+        create_answer_upvote
+        post :create, answer_id: @answer.id, vote: @vote_attributes
+        expect(response).to redirect_to(question_path(@question))
+      end
     end
 
   end
@@ -30,21 +89,3 @@ RSpec.describe VotesController, type: :controller do
 
 end
 
-
-# describe '#create' do
-#     it 'changes the total number of articles' do
-#       expect do
-#         post :create, {article: FactoryGirl.attributes_for(:article)}
-#       end.to change{Article.all.length}
-#     end
-#   end
-
-  # describe "#create" do
-  #   it 'redirects to root_path after voting on a question' do
-  #     expect do
-  #       question = FactoryGirl.create(:question)
-  #       user = FactoryGirl.create(:user)
-  #       vote = question.votes.build(value: 1, voter: user)
-  #       post :create, {vote: vote.create(value:1)}
-  #     end.to change{Vote.all.length}
-  #   end
