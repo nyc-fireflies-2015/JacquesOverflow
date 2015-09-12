@@ -19,6 +19,22 @@
 </div>
 <% end %>
 
+<ul class="question-comments-list">
+  <% @question.comments.each do |comment| %>
+    <li><%=comment.commentator.username%>: <%=comment.content%></li>
+  <% end %>
+</ul>  
+
+<% if logged_in? %>
+
+        <p>Add new comment</p>
+        <%= form_for @comment, url: question_comments_path(@question) do |f| %>
+            <%= text_area(:comment, :content, cols: 30, rows: 5) %>
+  <%= f.submit "Add comment" %>
+    <% end %>
+<% end %>    
+
+
 <div class='answers'>
   <h3>Answers</h3>
   <ul class="answer-list">
@@ -38,7 +54,7 @@
     <%end%>
     <%end%>
   </div>
-  <ul class="comments-list">
+  <ul class="answer-comments-list">
     <%ans.comments.each do |comment| %>
       <li><%=comment.commentator.username%>: <%=comment.content%></li>
       <% end %>
