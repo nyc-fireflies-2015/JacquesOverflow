@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_question
+  before_action :authenticate_user
 
   def create
     comment = Comment.new(comment_params)
@@ -24,5 +25,9 @@ class CommentsController < ApplicationController
 
   def find_question
     question = Question.find(comment.id)
+  end
+
+  def authenticate_user
+    redirect_to root_path if !current_user
   end
 end
