@@ -9,20 +9,19 @@ class VotesController < ApplicationController
       @question = Question.find_by(id: params[:question_id])
       @vote = @question.votes.build(vote_params.merge(voter: current_user))
       if @vote.save
-        redirect_to root_path
+        redirect_to question_path(@question)
       else
         flash[:notice] = 'Your vote has failed'
       end
     elsif params[:answer_id]
       @answer = Answer.find_by(id: params[:answer_id])
-      @vote = @answer.votes.build(vote_params.merge(voter_id: 1))
+      @vote = @answer.votes.build(vote_params.merge(voter: current_user))
       if @vote.save
-        redirect_to root_path
+        redirect_to question_path(@answer.question)
       else
         flash[:notice] = 'Your vote has failed'
       end
     end
-
   end
 
   # def destroy
