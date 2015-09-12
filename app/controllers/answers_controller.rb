@@ -7,7 +7,7 @@ class AnswersController < ApplicationController
 	def create
 		@question = Question.find_by(id: params[:question_id])
 		answer = @question.answers.build(answer_params.merge(responder: current_user))
-		if @answer.save
+		if answer.save
 			redirect_to question_path(@question)
 		else
 		redirect_to question_path(@question), flash: {error: 'Failed to Submit the Answer!'}
