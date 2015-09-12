@@ -6,7 +6,9 @@
   <%= render @comments %>
 </ul>  
 
-<%= render partial:"comments/new", object: @comment %>
+<% if logged_in? %>
+  <%= render partial:"comments/new", object: @comment %>
+<% end %>
 
 <div class='answers'>
   <h3>Answers</h3>
