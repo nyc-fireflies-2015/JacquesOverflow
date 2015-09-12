@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
       log_in(user)
       redirect_to root_url, notice: "Login Successful!"
     else
-      binding.pry
       redirect_to login_path, flash: {error: 'Login Failed!'}
     end
   end

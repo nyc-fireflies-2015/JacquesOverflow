@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       redirect_to profile_path
     else
 
-      redirect_to edit_user(@user)
+      redirect_to edit_user_path(@user)
     end
   end
 
