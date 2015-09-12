@@ -8,10 +8,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<h1><%= link_to "Log Out", logout_path, method: :delete if logged_in? %></h1><br>
-
   <%= render "layouts/header" %>
   <%= yield %>
-
 </body>
 </html>
