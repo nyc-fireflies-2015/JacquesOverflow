@@ -10,7 +10,7 @@ RSpec.describe User, type: :model do
 	 	it { expect(subject).to validate_length_of(:email).is_at_most(50) }
 	 	it { expect(subject).to validate_length_of(:avatar_url).is_at_most(50) }
  		it { expect(subject).to validate_length_of(:bio).is_at_most(500) }
- 		it { expect(subject).to validate_length_of(:password).is_at_least(6).on(:create) }
+ 		it { expect(subject).to validate_length_of(:password).is_at_least(6) }
 		it { expect(subject).to have_secure_password }
 		it { expect(User.new(username:"derpson")).to validate_uniqueness_of(:email) }
 		it { expect(User.new(email:"blah@gmail.com")).to validate_uniqueness_of(:username) }
