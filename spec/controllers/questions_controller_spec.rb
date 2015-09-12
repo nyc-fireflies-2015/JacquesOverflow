@@ -24,6 +24,19 @@ RSpec.describe QuestionsController, type: :controller do
     end
   end
 
+  describe "GET #new" do
+    it "renders the :new view when logged in" do
+      log_in(user)
+      get :new
+      expect(response).to render_template :new
+    end
+
+    it "redirects to root if not logged in" do
+      get :new
+      expect(response).to redirect_to root_path
+    end
+  end
+
   describe "PUT #update" do
     before :each do
       @question = FactoryGirl.create(:question, title: "Title", content: "content")
@@ -46,6 +59,11 @@ RSpec.describe QuestionsController, type: :controller do
         log_in(user)
         put :update, id: @question, question: FactoryGirl.attributes_for(:question)
         expect(response).to redirect_to @question
+      end
+
+      it "redirects root page if not logged in" do
+        put :update, id: @question
+        expect(response).to redirect_to root_path
       end
     end
 
