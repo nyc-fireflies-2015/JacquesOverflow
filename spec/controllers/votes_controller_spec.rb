@@ -44,12 +44,12 @@ RSpec.describe VotesController, type: :controller do
 
       it 'increases question rating by one if upvote' do
         create_question_upvote
-        expect{post :create, question_id: @question.id, vote: @vote_attributes}.to change{@question.rating}.from(nil).to(1)
+        expect{post :create, question_id: @question.id, vote: @vote_attributes}.to change{@question.rating}.by(1)
       end
 
       it 'decreases question rating by one if downvote' do
         create_question_downvote
-        expect{post :create, question_id: @question.id, vote: @vote_attributes}.to change{@question.rating}.from(nil).to(-1)
+        expect{post :create, question_id: @question.id, vote: @vote_attributes}.to change{@question.rating}.by(-1)
       end
 
 
@@ -68,12 +68,12 @@ RSpec.describe VotesController, type: :controller do
 
       it 'increases answer rating by one if upvote' do
         create_answer_upvote
-        expect{post :create, answer_id: @answer.id, vote: @vote_attributes}.to change{@answer.rating}.from(nil).to(1)
+        expect{post :create, answer_id: @answer.id, vote: @vote_attributes}.to change{@answer.rating}.by(1)
       end
 
       it 'decreases answer rating by one if downvote' do
         create_answer_downvote
-        expect{post :create, answer_id: @answer.id, vote: @vote_attributes}.to change{@answer.rating}.from(nil).to(-1)
+        expect{post :create, answer_id: @answer.id, vote: @vote_attributes}.to change{@answer.rating}.by(-1)
       end
 
 
