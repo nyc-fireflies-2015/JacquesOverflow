@@ -1,0 +1,31 @@
+header {
+  height: 3em;
+  border-bottom: #999 solid 1px;
+  padding: 1em;
+
+  a {
+    color: #EBEBEB;
+  }
+}
+
+.logo {
+  font-size: 2.3em;
+  font-family: 'Oswald', sans-serif;
+  border: none;
+}
+
+nav {
+  position: absolute;
+  top: 2.5em;
+  right: 1em;
+}
+
+.button {
+  padding: 0.5em;
+  background: #999;
+  border-radius: 0.3em;
+}
+
+a.button:hover {
+  color: #E6FFE6;
+}
