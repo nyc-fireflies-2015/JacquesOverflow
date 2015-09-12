@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+a, a:visited {
+  text-decoration: none;
+  color: #99CCFF;
+  border-bottom: dashed #999 1px;
+}
+
+h1 {
+  color: #999;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+hr {
+  color: #999;
+}
