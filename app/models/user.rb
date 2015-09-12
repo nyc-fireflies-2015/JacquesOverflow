@@ -25,4 +25,21 @@ class User < ActiveRecord::Base
 	def posted_comment?(comment)
 		id == comment.commentator.id
 	end	
+
+	def voted_on_question?(question)
+		votes.select {|vote| vote.voteable_type=="Question"}.map(&:voteable_id).include?(question.id)
+	end
+	
+	def voted_on_answer?(answer)
+		votes.select {|vote| vote.voteable_type=="Answer"}.map(&:voteable_id).include?(answer.id)
+	end
+
+	def authorized_to_vote_on_question?(question)
+		!(posted_question?(question) || voted_on_question?(question))
+	end
+	
+	def authorized_to_vote_on_answer?(answer)
+		!(posted_answer?(answer) || voted_on_answer?(answer))
+	end	
+
 end

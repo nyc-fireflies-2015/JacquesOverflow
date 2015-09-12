@@ -2,7 +2,7 @@
 
 <li>Rating: <%=answer.rating%> 
 
-  <% if logged_in? %>  
+  <% if logged_in? && current_user.authorized_to_vote_on_answer?(answer)%>  
     <div class="upvote">
       <%=form_for @vote, url: answer_votes_path(answer) do |f| %>
       <%= f.hidden_field :value, value: 1 %>
@@ -18,7 +18,7 @@
     </div>
   <% end %>
 
-  <% if current_user.posted_answer?(answer) %>  
+  <% if logged_in? && current_user.posted_answer?(answer) %>  
     <div class="answer-edit">
       <%= link_to "Edit answer", edit_question_answer_path(@question, answer) %>
     </div>
