@@ -2,14 +2,14 @@
 <h3 class="subtitle">Posted by <%=question.submitter.username%> </h3>
 <p class="question-content"><%= question.content %></p>
 
-<% if current_user.posted_question?(question) %>
+<% if logged_in? && current_user.posted_question?(question) %>
 <%= link_to "Edit Question", edit_question_path %>
 <%= link_to "Delete Question", question_path(question), method: :delete %>
 <% end %>	
 
 <p class="rating">Rating: <%=question.rating%></p>
 
-<% if logged_in? %>
+<% if logged_in? && current_user.authorized_to_vote_on_question?(question) %>
 <div class='upvote'>
 	<%= form_for @vote, url: question_votes_path(question) do |f| %>
 	<%= f.hidden_field :value, value: 1 %>
