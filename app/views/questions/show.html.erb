@@ -2,10 +2,11 @@
 
 <h3 class="subtitle">Comments</h3>
 
-
 <ul class="question-comments-list">
-  <%= render partial: "comments/comment", collection: @comments, as: :comment %>
+  <%= render @comments %>
 </ul>  
+
+<%= render partial:"comments/new", object: @comment %>
 
 <div class='answers'>
   <h3>Answers</h3>
