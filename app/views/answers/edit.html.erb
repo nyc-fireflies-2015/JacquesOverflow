@@ -1,0 +1,7 @@
+<h1>Edit your answer to "<%=@question.title%>"</h1>
+
+<%= form_for @answer, url: question_answer_path(@question, @answer) do |f| %>
+	<%= hidden_field_tag("_method", "put") %>
+	<%= text_area(:answer, :content, cols: 30, rows: 10) %>
+	<%= f.submit "Edit answer" %>
+<% end %>	

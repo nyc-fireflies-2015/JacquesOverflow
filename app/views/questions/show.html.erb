@@ -19,9 +19,14 @@
 </div>
 <% end %>
 
+
 <ul class="question-comments-list">
   <% @question.comments.each do |comment| %>
     <li><%=comment.commentator.username%>: <%=comment.content%></li>
+    <li><%=form_for comment, url: question_comment_path(@question, comment) do |f| %>
+        <%= hidden_field_tag("_method", "delete") %>
+        <%= f.submit "Delete comment" %>
+        <% end %></li>
   <% end %>
 </ul>  
 
@@ -52,11 +57,24 @@
     <%= f.hidden_field :value, value: -1 %>
     <%= f.submit  value: 'DownVote' %>
     <%end%>
-    <%end%>
   </div>
+  <div class="answer-edit">
+    <%= link_to "Edit answer", edit_question_answer_path(@question, ans) %>
+  </div>
+  <div class="answer-delete">
+    <%=form_for ans, url: question_answer_path(@question, ans) do |f| %>
+    <%= hidden_field_tag("_method", "delete") %>
+    <%= f.submit  value: 'Delete answer' %>
+    <%end%>
+  </div>  
+    <%end%>
   <ul class="answer-comments-list">
     <%ans.comments.each do |comment| %>
       <li><%=comment.commentator.username%>: <%=comment.content%></li>
+      <li><%=form_for comment, url: answer_comment_path(ans, comment) do |f| %>
+        <%= hidden_field_tag("_method", "delete") %>
+        <%= f.submit "Delete comment" %>
+        <% end %></li>
       <% end %>
             <% if logged_in? %>
         <p>Add new comment</p>
@@ -66,6 +84,7 @@
         <% end %>
     <% end %>  
   </ul>  
+
 </li>
   <%end%>
   </ul>
