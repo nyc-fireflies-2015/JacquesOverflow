@@ -43,7 +43,7 @@ class User < ActiveRecord::Base
 	end
 
 	def timestamp
-		milliseconds = self.created_at.to_i/1000
+		milliseconds = created_at.to_i/1000
 		seconds = milliseconds/1000
 		minutes = seconds/60
 		hours = minutes/60
