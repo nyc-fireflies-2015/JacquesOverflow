@@ -1,26 +1,26 @@
 <h1 class="q-header title">Questions</h1>
 
-	<nav class="question-links">
-		<%= link_to "Recent", recent_path, class: "sub-button" %>
-		<%= link_to "Popular", trending_path, class: "sub-button" %>
-		<%= link_to "Trending", votes_path, class: "sub-button" %>
-	</nav>
+<nav class="question-links">
+	<%= link_to "Recent", recent_path, class: "sub-button" %>
+	<%= link_to "Popular", trending_path, class: "sub-button" %>
+	<%= link_to "Trending", votes_path, class: "sub-button" %>
+</nav>
 
 <hr>
 
 <% @questions.each do |question| %>
-  <table>
-    <tr>
-      <td class="rating">
-        <p><%= question.rating %></p>
-        <p class>votes</p>
-      </td>
-      <td>
-        <p class="q-title"><%= link_to question.title, question_path(question) %></p>
-        <p><%= question.content %></p>
-        <%= image_tag(question.submitter.avatar_url, class: "icon") %> <sub>asked <%= question.timestamp %> ago <%= link_to "#{question.submitter.username}", profile_path(question.submitter) %></sub>
-      </td>
-    </tr>
-  </table>
-  <hr>
+<table>
+	<tr>
+		<td class="rating">
+			<p><%= question.rating %></p>
+			<p class>votes</p>
+		</td>
+		<td>
+			<p class="q-title"><%= link_to question.title, question_path(question) %></p>
+			<p><%= question.content %></p>
+			<%= image_tag(question.submitter.avatar_url, class: "icon") %> <sub>asked <%= question.timestamp %> ago <%= link_to "#{question.submitter.username}", profile_path(question.submitter) %></sub>
+		</td>
+	</tr>
+</table>
+<hr>
 <% end %>
