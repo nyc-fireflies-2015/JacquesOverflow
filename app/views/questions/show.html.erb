@@ -2,10 +2,7 @@
   <%= render @question %>
 
   <h3 class="subtitle">Comments</h3>
-
-  <ul class="question-comments-list">
-    <%= render @comments %>
-  </ul>
+  <%= render @comments %>
 
   <% if logged_in? %>
     <%= render partial:"comments/new", object: @comment %>
@@ -13,9 +10,7 @@
 
   <div class="answers">
     <h3 class="subtitle">Answers</h3>
-    <ul class="answer-list">
-      <%= render @answers %>
-    </ul>
+    <%= render @answers %>
   </div>
 
   <% if logged_in? %>

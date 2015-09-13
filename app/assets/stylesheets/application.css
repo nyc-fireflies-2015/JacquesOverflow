@@ -56,3 +56,8 @@ a.sub-button {
 td {
   padding: 0.5em;
 }
+
+.center {
+  text-align: center;
+  margin: auto;
+}
