@@ -22,11 +22,11 @@ class Question < ActiveRecord::Base
 	end
 
 	def self.order_by_trending
-		self.all.sort {|q1, q2| q1.votes_per_hour <=> q2.votes_per_hour}
+		self.all.sort {|q1, q2| q2.votes_per_hour <=> q1.votes_per_hour}
 	end
 
 	def self.order_by_votes
-		self.all.sort {|q1, q2| q1.rating <=> q2.rating}
+		self.all.sort {|q1, q2| q2.rating <=> q1.rating}
 	end
 
 	def timestamp
