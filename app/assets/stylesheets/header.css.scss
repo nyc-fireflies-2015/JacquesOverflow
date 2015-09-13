@@ -1,12 +1,43 @@
 header {
-  height: 3em;
-  border-bottom: #999 solid 1px;
+  height: 4em;
   padding: 1em;
 
-  a {
+  #logo a {
     color: #EBEBEB;
+    border: none;
+  }
+
+  #logo a:visited {
+    border: none;
+  }
+
+  #logo {
+    float: left;
+  }
+
+  #logo div {
+    display: block;
+    float: left;
+  }
+
+  #so-img img {
+    height: 5em;
+  }
+
+  #word-1 img {
+    padding-top: 1.5em;
+    margin-left: -0.5em;
+    height: 3em;
+  }
+
+  #word-2 img {
+    height: 3em;
+    padding-top: 1.6em;
+    margin-left: -0.25em;
   }
 }
+
+
 
 .logo {
   font-size: 2.3em;
