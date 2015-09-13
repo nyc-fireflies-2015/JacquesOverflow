@@ -23,6 +23,9 @@ RSpec.describe User, type: :model do
 	end
 
 	let(:user) { FactoryGirl.create(:user) }
+	let(:question) { FactoryGirl.create(:question) }
+	let(:answer) { FactoryGirl.create(:answer) }
+	let(:comment) { FactoryGirl.create(:comment) }
 
 	describe '#posted_question?' do 
 		it 'should return true if user posted question' do 
@@ -46,15 +49,43 @@ RSpec.describe User, type: :model do
 	end
 
 	describe '#voted_on_question?' do
+		it 'should return true if user already voted on question' do 
+			question.votes.create(value: 1, voter: user)
+			expect(user.voted_on_question?(question)).to be_truthy
+		end	
 	end
 	
 	describe '#voted_on_answer?' do
+		it 'should return true if user already voted on answer' do 
+			answer.votes.create(value: 1, voter: user)
+			expect(user.voted_on_answer?(answer)).to be_truthy
+		end	
 	end
 
-	describe '#authorized_to_vote_on_answer?' do 
+	describe '#authorized_to_vote_on_question?' do 
+		it 'should return false if user posted question' do
+			question = user.questions.create(FactoryGirl.attributes_for(:question)) 
+			expect(user.authorized_to_vote_on_question?(question)).to be_falsey
+		end
+		
+		it 'should return false if user already voted on question' do
+			question.update_attributes(submitter: FactoryGirl.create(:user))
+			question.votes.create(value: 1, voter: user)
+			expect(user.authorized_to_vote_on_question?(question)).to be_falsey
+		end	
 	end	
 
 	describe '#authorized_to_vote_on_answer?' do 
+		it 'should return false if user posted question' do
+			answer = user.answers.create(FactoryGirl.attributes_for(:answer)) 
+			expect(user.authorized_to_vote_on_answer?(answer)).to be_falsey
+		end
+
+		it 'should return false if user already voted on answer' do
+			answer.update_attributes(responder: FactoryGirl.create(:user))
+			answer.votes.create(value: 1, voter: user)
+			expect(user.authorized_to_vote_on_answer?(answer)).to be_falsey
+		end	
 	end	
 
 	describe '#timestamp' do 
