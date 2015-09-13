@@ -7,7 +7,7 @@
     <div class="user-bio">
       <h1><%= @user.username %>'s Profile</h1>
       <p><%= @user.bio %></p>
-      <p><%= link_to "Edit Profile", edit_user_path if @user.id == current_user.id%></p>
+      <p><%= link_to "Edit Profile", edit_user_path if logged_in? && owns_profile?(@user)%></p>
       <hr>
 
 

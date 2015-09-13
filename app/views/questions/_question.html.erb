@@ -14,20 +14,27 @@
         <div class='upvote'>
           <%= form_for @vote, url: question_votes_path(question) do |f| %>
             <%= f.hidden_field :value, value: 1 %>
-          	<%= f.submit  value: "UpVote", type: :image, src: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-media/003363-glossy-black-icon-media-media2-arrow-up.png", class: "vote" %>
+          	<%= image_submit_tag("up-arrow.png", class: "vote") %>
           <% end %>
         </div>
-      <% end %>
-        <p class="rating"><%=question.rating%> Rating</p>
 
-      <% if logged_in? && current_user.authorized_to_vote_on_question?(question) %>
+         <p class="rating"><%=question.rating%> votes</p>
+
         <div class='downvote'>
         	<%= form_for @vote, url: question_votes_path(question) do |f| %>
         	<%= f.hidden_field :value, value: -1 %>
-        	<%= f.submit  value: 'DownVote', type: :image, src: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-media/003362-glossy-black-icon-media-media2-arrow-down.png", class: "vote" %>
+        	<%= image_submit_tag("down-arrow.png", class: "vote") %>
         	<% end %>
         </div>
       <% end %>
+
+    <div class="vote-buttons">  
+      <% if !logged_in? || !current_user.authorized_to_vote_on_question?(question) %>
+        <%= link_to image_tag("up-arrow.png"), class: "vote" %>
+        <p class="rating"><%=question.rating%> votes</p>
+        <%= link_to image_tag("down-arrow.png"), class: "vote" %>
+      <% end %>
+     </div> 
     </td>
     <td>
       <p class="question-content"><%= question.content %></p>
