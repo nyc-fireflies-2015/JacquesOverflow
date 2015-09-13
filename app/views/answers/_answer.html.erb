@@ -17,10 +17,9 @@
         <%= image_submit_tag("down-arrow.png", class: "answer-vote") %>
         <%end%>
       </div>
-      <% end %>
+      <% else %>
       
       <div class="answer-vote-buttons">  
-        <% if !logged_in? || !current_user.authorized_to_vote_on_answer?(answer) %>
         <%= link_to image_tag("up-arrow.png"), class: "answer-vote" %>
         <div class="center"><%= answer.rating %></div>
 
