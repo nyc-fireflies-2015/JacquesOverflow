@@ -27,10 +27,24 @@
         <% end %>
       </td>
       <td>
+        <% if answer.best_answer %>
+        <p>Chosen as best answer!</p>
+        <% end %>
+
         <%= link_to answer.responder.username, profile_path(answer.responder) %>: <%=answer.content %>
       </td>
     </tr>
   </table>
+
+  <% if current_user.posted_question?(@question) && !@question.has_best_answer?%>
+    <div class="choose-best-answer">
+      <%= form_for answer, url: question_answer_path(@question, answer) do |f| %>
+      <%= hidden_field_tag("_method", "put") %>
+      <%= f.hidden_field :best_answer, value: true %>
+      <%= f.submit "Choose as best answer" %>
+      <% end %>
+    </div>  
+  <% end %>
 
   <% if logged_in? && current_user.posted_answer?(answer) %>
   <div class="answer-edit">
@@ -42,7 +56,6 @@
     <%= f.submit 'Delete answer' %>
     <%end%>
   </div>
-
   <%end%>
 
   <ul class="answer-comments-list">

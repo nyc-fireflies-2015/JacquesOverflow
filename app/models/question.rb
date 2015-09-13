@@ -13,12 +13,8 @@ class Question < ActiveRecord::Base
 		votes.pluck(:value).reduce(:+) || 0
 	end
 
-	def best_answer
-		answers.select {|answer| answer.best_answer}
-	end	
-
 	def has_best_answer?
-		!!best_answer
+		best_answer_id
 	end	
 
 	def votes_per_hour
