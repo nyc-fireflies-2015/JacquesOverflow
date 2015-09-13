@@ -1,11 +1,21 @@
-// Place all the styles related to the questions controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.title {
+	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+	font-size: 20pt;
+}
+
+.q-header {
+	margin-bottom: 0;
+}
+
+.q-title {
+	font-size: 14pt;
+}
 
 td.rating {
   border-right: 1px solid #999;
   width: 4em;
 }
+
 
 .vote {
   width: 6em;
@@ -15,4 +25,37 @@ td.rating {
 .sub-vote {
   width: 3em;
   height: 3em;
+}  
+
+.question-links {
+	float: right;
+	margin-top: -2em;
+
+	  a {
+    background-color: #858d93;
+    padding: 4px 10px 5px;
+    margin: 0.15em;
+    color: white !important;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 12pt;
+  }
+
+  a:hover {
+    background-color: #FF9500;
+    border: none;
+  }
+}
+
+table {
+	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+
+	a {
+		border: none;
+	}
+
+	.rating p {
+		font-weight: bold;
+		margin: 0;
+		text-align: center;
+	}
 }
