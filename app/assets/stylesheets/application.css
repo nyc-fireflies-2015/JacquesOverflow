@@ -28,3 +28,19 @@ h1 {
 hr {
   color: #999;
 }
+
+sub {
+  color: #999;
+}
+
+.sub-button {
+  border: #999 solid 1px;
+  padding: 0 0.3em;
+  font-size: 1.2em;
+}
+
+.icon {
+  width: 2em;
+  height: 2em;
+  border: 1px solid #999;
+}
