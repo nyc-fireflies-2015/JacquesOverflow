@@ -1,5 +1,4 @@
-<ul class="question-comments-list">
-  <li>
+<li>
     <%= link_to comment.commentator.username, profile_path(comment.commentator) %>: <%=comment.content%>
     <% if logged_in? && current_user.posted_comment?(comment) %>
       <%= form_for comment, url: question_comment_path(@question, comment) do |f| %>
@@ -7,6 +6,6 @@
         <%= f.submit "Delete comment" %>
       <% end %>
     <% end %>
-  </li>
-</ul>
+</li>
+
 
