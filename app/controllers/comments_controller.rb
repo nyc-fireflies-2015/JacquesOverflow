@@ -9,13 +9,20 @@ class CommentsController < ApplicationController
     elsif params[:question_id]
       @question = Question.find_by(id: params[:question_id])
       comment = @question.comments.build(comment_params.merge(commentator: current_user))
-    end
-    if comment.save && request.xhr?
+      if comment.save && request.xhr?
       :render partial:'questions/question_comments', object: comment, layout: false
       # redirect_to question_path(@question)
-    else
+      else
       redirect_to question_path(@question), flash: {error: "Comment must be 1500 chars or less." }
+      end
     end
+
+    # if comment.save && request.xhr?
+    #   :render partial:'questions/question_comments', object: comment, layout: false
+    #   # redirect_to question_path(@question)
+    # else
+    #   redirect_to question_path(@question), flash: {error: "Comment must be 1500 chars or less." }
+    # end
   end
 
   def destroy
