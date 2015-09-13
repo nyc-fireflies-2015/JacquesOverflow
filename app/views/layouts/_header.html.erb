@@ -9,7 +9,7 @@
   <% end %>
   <nav>
     <%= link_to "Questions", root_path %>
-    <%= link_to "Ask a Question", questions_path %>
+    <%= link_to "Ask a Question", new_question_path %>
     <% if logged_in? %>
       <%= link_to "Profile", profile_path(current_user) %>
       <%= link_to "Log Out", logout_path, method: :delete %>
