@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
   include SessionsHelper
+
   let(:question) { FactoryGirl.create :question }
   let(:user) { FactoryGirl.create :user }
 
@@ -10,6 +11,24 @@ RSpec.describe QuestionsController, type: :controller do
       get :index
       expect(response).to render_template :index
     end
+    it "displays questions in order of recency" do 
+      get :index
+      expect(assigns(:questions)).to eq(Question.order_by_recent)
+    end  
+  end
+
+  describe "GET #votes" do 
+    it "displays questions by number of votes" do 
+      get :index
+      expect(assigns(:questions)).to eq(Question.order_by_votes)
+    end  
+  end
+
+  describe "GET #trending" do 
+      it "displays questions by number of votes per hour" do 
+      get :index
+      expect(assigns(:questions)).to eq(Question.order_by_trending)
+    end  
   end
 
   describe "GET #show" do
