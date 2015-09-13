@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/trending' => 'questions#trending'
   get '/votes' => 'questions#votes'
   get '/recent' => 'questions#index'
+  get '/bestanswer' => 'answers#best'
 
   resources :answers, only: [:show] do 
     resources :comments, only: [:create, :destroy]

@@ -31,6 +31,11 @@ class AnswersController < ApplicationController
 		redirect_to question_path(@question)
 	end
 
+	def best
+		@answer.best_answer == true
+		redirect_to question_path(@question)
+	end	
+
 	private
 
 	def find_answer
