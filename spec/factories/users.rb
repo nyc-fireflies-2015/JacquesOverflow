@@ -2,7 +2,6 @@ FactoryGirl.define do
   factory :user do
     username {Faker::Internet.user_name}
     email {Faker::Internet.email}
-    avatar_url {Faker::Avatar.image}
     bio "This user likes to be mysterious"
     password "supersecure"
 

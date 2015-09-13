@@ -9,7 +9,8 @@ class UsersController < ApplicationController
       log_in(user)
       redirect_to root_path, notice: "Account Has Created!!"
     else
-      redirect_to register_path, flash: {error: 'Registration Failed!'}
+      flash[:registration_error] = user.errors.full_messages
+      redirect_to register_path
     end
   end
 
