@@ -1,3 +1,39 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#user-profile {
+  width: 80%;
+}
+
+.avatar {
+  float: left;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.user-stats {
+  width: 250px;
+  float: right;
+}
+
+.user-bio {
+  float: left;
+  margin-left: 200px;
+}
+
+.number {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.user-stats ul {
+  list-style: none;
+}
+
+
+.user-activity {
+  clear: both;
+}
+
+
