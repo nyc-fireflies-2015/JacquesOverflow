@@ -1,3 +1,5 @@
+[![Circle CI](https://circleci.com/gh/nyc-fireflies-2015/JacquesOverflow.svg?style=svg)](https://circleci.com/gh/nyc-fireflies-2015/JacquesOverflow)
+
 # JacquesOverflow
 
 ## Team Baconator

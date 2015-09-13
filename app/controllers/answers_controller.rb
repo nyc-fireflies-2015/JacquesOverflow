@@ -18,8 +18,8 @@ class AnswersController < ApplicationController
 	end
 
 	def update
-		@answer.attributes = answer_params
-		if @answer.save
+		@question.update_attributes(best_answer_id: @answer.id) if params[:answer][:best_answer]
+		if @answer.update_attributes(answer_params)
 			redirect_to question_path(@question)
 		else
 			redirect_to question_path(@question), flash: {error: 'Failed to Update the Answer!'}
@@ -42,7 +42,7 @@ class AnswersController < ApplicationController
 	end
 
 	def answer_params
-		params.require(:answer).permit(:content)
+		params.require(:answer).permit(:content, :best_answer)
 	end
 
 	def authenticate_user

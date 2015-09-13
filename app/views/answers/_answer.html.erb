@@ -17,10 +17,9 @@
         <%= image_submit_tag("down-arrow.png", class: "answer-vote") %>
         <%end%>
       </div>
-      <% end %>
+      <% else %>
       
       <div class="answer-vote-buttons">  
-        <% if !logged_in? || !current_user.authorized_to_vote_on_answer?(answer) %>
         <%= link_to image_tag("up-arrow.png"), class: "answer-vote" %>
         <div class="center"><%= answer.rating %></div>
 
@@ -28,10 +27,24 @@
         <% end %>
       </td>
       <td>
+        <% if answer.best_answer %>
+        <p>Chosen as best answer!</p>
+        <% end %>
+
         <%= link_to answer.responder.username, profile_path(answer.responder) %>: <%=answer.content %>
       </td>
     </tr>
   </table>
+
+  <% if current_user.posted_question?(@question) && !@question.has_best_answer?%>
+    <div class="choose-best-answer">
+      <%= form_for answer, url: question_answer_path(@question, answer) do |f| %>
+      <%= hidden_field_tag("_method", "put") %>
+      <%= f.hidden_field :best_answer, value: true %>
+      <%= f.submit "Choose as best answer" %>
+      <% end %>
+    </div>  
+  <% end %>
 
   <% if logged_in? && current_user.posted_answer?(answer) %>
   <div class="answer-edit">

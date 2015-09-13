@@ -8,6 +8,11 @@
 
 <hr>
 
+<% if @questions.empty? %>
+  <p>There are no questions that match your search.<br>
+    Your search query might be too specific.</p>
+<% end %>
+
 <% @questions.each do |question| %>
 <table>
 	<tr>

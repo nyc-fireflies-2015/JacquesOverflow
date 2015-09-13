@@ -1,8 +1,9 @@
 class QuestionsController < ApplicationController
   before_action :find_question, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user, except: [:index, :show, :trending, :votes]
+  before_action :authenticate_user, only: [:new, :create, :edit, :update, :destroy]
 
   def index
+    @question = Question.new
     @questions = Question.order_by_recent
   end
 
@@ -10,11 +11,17 @@ class QuestionsController < ApplicationController
     @questions = Question.order_by_trending
     render :index
   end
-  
+
   def votes
     @questions = Question.order_by_votes
     render :index
-  end  
+  end
+
+  def search
+    @questions = Question.where("title ILIKE ?", "%#{params[:search]}%")
+    @questions.order_by_recent
+    render :index
+  end
 
   def show
     @comments = @question.comments

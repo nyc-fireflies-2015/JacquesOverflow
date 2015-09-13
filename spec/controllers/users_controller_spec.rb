@@ -34,9 +34,6 @@ RSpec.describe UsersController, type: :controller do
     it "redirects user to the homepage if signup successful" do
       get :new
       create_user
-      # post :create, user: @user_attributes
-      # binding.pry
-      #can't figure this one out
       expect(response.status).to eq(200)
     end
 

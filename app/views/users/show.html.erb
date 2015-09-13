@@ -5,36 +5,63 @@
     </div>
 
     <div class="user-bio">
-      <h1><%= @user.username %>'s Profile</h1>
+      <h1><%= @user.username %>'s Bio</h1>
       <p><%= @user.bio %></p>
       <p><%= link_to "Edit Profile", edit_user_path if logged_in? && owns_profile?(@user)%></p>
-      <hr>
+    </div>
 
-
+    <div class="user-stats">
+      <h1><%= @user.username %>'s Stats </h1>
+      <ul>
+        <li> Member since <%= @user.timestamp %> ago</li>
+        <li><span class="number"><%= @user.reputation %></span> Reputation Points </li>
+        <li><span class="number"><%= @user.questions.count %></span> Questions Asked</li>
+        <li><span class="number"><%= @user.answers.count %></span> Answers submitted</li>
+        <li><span class="number"><%= @user.comments.count %></span> Comments Posted</li>
+      </ul>
     </div>
   </div>
 
   <div class="user-activity">
-    <div class="user-questions">
-      <h2><%= @user.username %>'s Questions</h2>
-        <ul>
-          <% @user.questions.each do |question| %>
-          <li><%= link_to question.title, question_path %></li>
-          <%end%>
-        </ul>
-    </div>
+    <hr>
+    <h1><%= @user.username %>'s Questions </h1>
+    <% @user.questions.each do |question| %>
+    <table>
+      <tr>
+        <td class="q-stats">
+          <%= question.rating %><br>
+          votes
+        </td>
+        <td class="q-info">
+          <p class="q-title"><%= link_to question.title, question_path(question) %></p>
+          <p><%= question.content %></p>
+          <sub>asked <%= question.timestamp %> ago</sub>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <% end %>
 
-    <div class="user-answers">
-      <h2><%= @user.username %>'s Answers</h2>
-      <ul>
-        <% @user.answers.each do |answer| %>
-        <li><%= link_to answer.question.title, question_path %></li>
-        <ul><li><%= answer.content %></li></ul>
-        <%end%>
-      </ul>
-    </div>
+    <hr>
+    <h1><%= @user.username %>'s Answers</h1>
+    <% @user.answers.each do |answer| %>
+    <table>
+      <tr>
+        <td class="q-stats">
+          <%= answer.rating %><br>
+          votes
+        </td>
+        <td class="q-info">
+          <p class="q-title"><%= link_to answer.question.title, question_path(answer.question) %></p>
+          <p><b><%= answer.content %></b></p>
+          <sub>Posted <%= answer.timestamp %> ago</sub>
+        </td>
+      </tr>
+    </table>
+    <hr>
+    <% end %>
+
+  </div>
+
 </div>
 
-
-
-</div>

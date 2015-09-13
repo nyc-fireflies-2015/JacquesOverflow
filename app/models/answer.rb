@@ -9,5 +9,23 @@ class Answer < ActiveRecord::Base
 
 	def rating
 		votes.pluck(:value).reduce(:+) || 0
-	end	
+	end
+
+  def timestamp
+    milliseconds = self.created_at.to_i/1000
+    seconds = milliseconds/1000
+    minutes = seconds/60
+    hours = minutes/60
+    days = hours/24
+
+    if minutes == 0
+      return "#{seconds} seconds"
+    elsif hours == 0
+      return "#{minutes} minutes"
+    elsif days == 0
+      return "#{hours} hours"
+    else
+      return "#{days} days"
+    end
+  end
 end
