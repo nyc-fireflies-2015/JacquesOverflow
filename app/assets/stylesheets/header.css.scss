@@ -1,6 +1,8 @@
 header {
   height: 4em;
   padding: 1em;
+  margin-left: 4em;
+  margin-right: 8em;
 
   #logo a {
     color: #EBEBEB;
@@ -37,11 +39,10 @@ header {
   }
 }
 
-
 nav {
   position: absolute;
   top: 3.5em;
-  right: 3em;
+  right: 7em;
 
   a {
     background-color: #858d93;
@@ -57,3 +58,8 @@ nav {
     border: none;
   }
 }
+
+.content {
+  margin: 5em 10em 3em 10em;
+}
+

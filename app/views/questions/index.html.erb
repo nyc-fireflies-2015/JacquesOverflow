@@ -1,5 +1,7 @@
+<h1 class="title">Questions</h1>
+<hr>
 <% @questions.each do |question| %>
-  <%= link_to question.title, question_path(question) %>
+  <p class="q-title"><%= link_to question.title, question_path(question) %></p>
   <p><%= question.content %></p>
   <hr>
 <% end %>
