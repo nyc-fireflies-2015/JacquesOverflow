@@ -13,6 +13,10 @@ module SessionsHelper
     !current_user.nil?
   end
 
+  def owns_profile?(user)
+    current_user == user
+  end  
+
   def log_out
     session.delete(:user_id)
     @current_user = nil
