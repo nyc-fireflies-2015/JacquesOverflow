@@ -14,6 +14,10 @@
  *= require_self
  */
 
+main {
+  padding: 0 2em;
+ }
+
 a, a:visited {
   text-decoration: none;
   color: #99CCFF;
@@ -51,4 +55,9 @@ a.sub-button {
 
 td {
   padding: 0.5em;
+}
+
+.center {
+  text-align: center;
+  margin: auto;
 }

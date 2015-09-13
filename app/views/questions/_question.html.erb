@@ -1,25 +1,36 @@
 <h1 class="title"><%= question.title %></h1>
-<h3 class="subtitle">Posted by <%=question.submitter.username%> </h3>
-<p class="question-content"><%= question.content %></p>
+<%= image_tag question.submitter.avatar_url, class: "icon" %>
+<sub class="subtitle">Posted by <%= link_to question.submitter.username, profile_path(question.submitter) %></sub>
 
-<% if logged_in? && current_user.posted_question?(question) %>
-<%= link_to "Edit Question", edit_question_path %>
-<%= link_to "Delete Question", question_path(question), method: :delete %>
-<% end %>	
+<table>
+  <tr>
+    <td>
+      <% if logged_in? && current_user.posted_question?(question) %>
+        <%= link_to "Edit Question", edit_question_path %>
+        <%= link_to "Delete Question", question_path(question), method: :delete %>
+      <% end %>
 
-<p class="rating">Rating: <%=question.rating%></p>
+      <% if logged_in? && current_user.authorized_to_vote_on_question?(question) %>
+        <div class='upvote'>
+          <%= form_for @vote, url: question_votes_path(question) do |f| %>
+            <%= f.hidden_field :value, value: 1 %>
+          	<%= f.submit  value: "UpVote", type: :image, src: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-media/003363-glossy-black-icon-media-media2-arrow-up.png", class: "vote" %>
+          <% end %>
+        </div>
+      <% end %>
+        <p class="rating"><%=question.rating%> Rating</p>
 
-<% if logged_in? && current_user.authorized_to_vote_on_question?(question) %>
-<div class='upvote'>
-	<%= form_for @vote, url: question_votes_path(question) do |f| %>
-	<%= f.hidden_field :value, value: 1 %>
-	<%= f.submit  value: 'UpVote' %>
-	<% end %>
-</div>
-<div class='downvote'>
-	<%= form_for @vote, url: question_votes_path(question) do |f| %>
-	<%= f.hidden_field :value, value: -1 %>
-	<%= f.submit  value: 'DownVote' %>
-	<% end %>
-</div>
-<% end %>
+      <% if logged_in? && current_user.authorized_to_vote_on_question?(question) %>
+        <div class='downvote'>
+        	<%= form_for @vote, url: question_votes_path(question) do |f| %>
+        	<%= f.hidden_field :value, value: -1 %>
+        	<%= f.submit  value: 'DownVote', type: :image, src: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-media/003362-glossy-black-icon-media-media2-arrow-down.png", class: "vote" %>
+        	<% end %>
+        </div>
+      <% end %>
+    </td>
+    <td>
+      <p class="question-content"><%= question.content %></p>
+    </td>
+  </tr>
+</table>

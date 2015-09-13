@@ -1,4 +1,6 @@
-<li><%=comment.commentator.username%>: <%=comment.content%></li>
+<li>
+  <%= link_to comment.commentator.username, profile_path(comment.commentator) %>: <%=comment.content%>
+</li>
 
 <% if logged_in? && current_user.posted_comment?(comment) %>
 	<li><%=form_for comment, url: answer_comment_path(answer, comment) do |f| %>
@@ -6,6 +8,6 @@
 		<%= f.submit "Delete comment" %>
 		<% end %>
 	</li>
-<% end %>	
+<% end %>
 
 

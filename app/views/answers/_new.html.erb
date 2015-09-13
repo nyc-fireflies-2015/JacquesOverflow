@@ -1,7 +1,7 @@
 <div class="new-answer">
 	<h3 class="subtitle"> Submit an answer </h3>
 	<%= form_for @answer, url: question_answers_path(@question) do |f| %>
-	<%= text_area(:answer, :content, cols: 30, rows: 10) %>
-	<%= f.submit "Add answer" %>
+  	<%= text_area(:answer, :content, cols: 30, rows: 10) %>
+  	<%= f.submit "Add answer" %>
 	<% end %>
-</div> 
+</div>
