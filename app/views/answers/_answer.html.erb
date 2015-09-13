@@ -13,8 +13,8 @@
 
       <div class='downvote'>
         <%=form_for @vote, url: answer_votes_path(answer) do |f| %>
-        <%= f.hidden_field :value, value: -1 %>
-        <%= image_submit_tag("down-arrow.png", class: "answer-vote") %>
+          <%= f.hidden_field :value, value: -1 %>
+          <%= image_submit_tag("down-arrow.png", class: "answer-vote") %>
         <%end%>
       </div>
       <% else %>
@@ -28,7 +28,7 @@
       </td>
       <td>
         <% if answer.best_answer %>
-        <p>Chosen as best answer!</p>
+          <p>Chosen as best answer!</p>
         <% end %>
 
         <%= link_to answer.responder.username, profile_path(answer.responder) %>: <%=answer.content %>
@@ -36,31 +36,31 @@
     </tr>
   </table>
 
-  <% if current_user.posted_question?(@question) && !@question.has_best_answer?%>
+  <% if logged_in? && current_user.posted_question?(@question) && !@question.has_best_answer?%>
     <div class="choose-best-answer">
       <%= form_for answer, url: question_answer_path(@question, answer) do |f| %>
-      <%= hidden_field_tag("_method", "put") %>
-      <%= f.hidden_field :best_answer, value: true %>
-      <%= f.submit "Choose as best answer" %>
+        <%= hidden_field_tag("_method", "put") %>
+        <%= f.hidden_field :best_answer, value: true %>
+        <%= f.submit "Choose as best answer" %>
       <% end %>
     </div>
   <% end %>
 
   <% if logged_in? && current_user.posted_answer?(answer) %>
-  <div class="answer-edit">
-    <%= link_to "Edit answer", edit_question_answer_path(@question, answer) %>
-  </div>
-  <div class="answer-delete">
-    <%=form_for answer, url: question_answer_path(@question, answer) do |f| %>
-    <%= hidden_field_tag("_method", "delete") %>
-    <%= f.submit 'Delete answer' %>
-    <%end%>
-  </div>
+    <div class="answer-edit">
+      <%= link_to "Edit answer", edit_question_answer_path(@question, answer) %>
+    </div>
+    <div class="answer-delete">
+      <%=form_for answer, url: question_answer_path(@question, answer) do |f| %>
+        <%= hidden_field_tag("_method", "delete") %>
+        <%= f.submit 'Delete answer' %>
+      <%end%>
+    </div>
   <%end%>
 
   <ul class="answer-comments-list">
     <%= render partial:"comments/answer_comment", collection:answer.comments, as: :comment, locals: {answer: answer} %>
     <% if logged_in? %>
-    <%= render partial:"comments/answer_new", object: @comment, locals: {answer: answer} %>
+      <%= render partial:"comments/answer_new", object: @comment, locals: {answer: answer} %>
     <% end %>
   </ul>

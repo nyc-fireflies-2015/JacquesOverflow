@@ -5,8 +5,7 @@ module SessionsHelper
 
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
-    #prevents having to hit the database every time current_user is called
-    #on a page
+    #prevents having to hit the database every time current_user is called on a page
   end
 
   def logged_in?
@@ -15,7 +14,7 @@ module SessionsHelper
 
   def owns_profile?(user)
     current_user == user
-  end  
+  end
 
   def log_out
     session.delete(:user_id)
