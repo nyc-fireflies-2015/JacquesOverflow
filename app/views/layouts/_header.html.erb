@@ -17,10 +17,10 @@
       <%= link_to "Log In", login_path, class: "button" %>
     <%end%>
     <p>
-      <form id="search">
+      <%= form_for :question, url: search_path, method: "get", id: "search" do |f|%>
         <%= image_tag("searchicon.png") %>
-        <input type="text" placeholder="search" class="search-text">
-      </form>
+        <%= f.text_field :title, name: "search", placeholder: "search", class: "search-text"%>
+      <% end %>
     <p>
   </nav>
 </header>
