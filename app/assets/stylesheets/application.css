@@ -24,7 +24,7 @@ a, a:visited {
   border-bottom: dashed #999 1px;
 }
 
-h1, h3 {
+h1, h2, h3 {
   color: #999;
   font-family: 'Open Sans Condensed', sans-serif;
 }

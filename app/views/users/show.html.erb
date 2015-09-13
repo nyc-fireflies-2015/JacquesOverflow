@@ -1,67 +1,59 @@
-<div class="container">
-  <div id="user-profile">
-    <div class="avatar">
-      <img src="<%= @user.avatar_url %>" />
-    </div>
-
-    <div class="user-bio">
-      <h1><%= @user.username %>'s Bio</h1>
-      <p><%= @user.bio %></p>
-      <p><%= link_to "Edit Profile", edit_user_path if logged_in? && owns_profile?(@user)%></p>
-    </div>
-
-    <div class="user-stats">
-      <h1><%= @user.username %>'s Stats </h1>
+<table class="profile">
+  <tr>
+    <td>
+      <%= image_tag(@user.avatar_url, class: "avatar") %>
+    </td>
+    <td>
+      <h1><%= @user.username %></h1>
       <ul>
-        <li> Member since <%= @user.timestamp %> ago</li>
+        <li>Member since <%= @user.timestamp %> ago</li>
         <li><span class="number"><%= @user.reputation %></span> Reputation Points </li>
         <li><span class="number"><%= @user.questions.count %></span> Questions Asked</li>
         <li><span class="number"><%= @user.answers.count %></span> Answers submitted</li>
         <li><span class="number"><%= @user.comments.count %></span> Comments Posted</li>
       </ul>
-    </div>
-  </div>
+    </td>
+  </tr>
+</table>
 
-  <div class="user-activity">
-    <hr>
-    <h1><%= @user.username %>'s Questions </h1>
-    <% @user.questions.each do |question| %>
-    <table>
-      <tr>
-        <td class="q-stats">
-          <%= question.rating %><br>
-          votes
-        </td>
-        <td class="q-info">
-          <p class="q-title"><%= link_to question.title, question_path(question) %></p>
-          <p><%= question.content %></p>
-          <sub>asked <%= question.timestamp %> ago</sub>
-        </td>
-      </tr>
-    </table>
-    <hr>
-    <% end %>
-
-    <hr>
-    <h1><%= @user.username %>'s Answers</h1>
-    <% @user.answers.each do |answer| %>
-    <table>
-      <tr>
-        <td class="q-stats">
-          <%= answer.rating %><br>
-          votes
-        </td>
-        <td class="q-info">
-          <p class="q-title"><%= link_to answer.question.title, question_path(answer.question) %></p>
-          <p><b><%= answer.content %></b></p>
-          <sub>Posted <%= answer.timestamp %> ago</sub>
-        </td>
-      </tr>
-    </table>
-    <hr>
-    <% end %>
-
-  </div>
-
+<hr>
+<div class="center">
+  <h2>Bio</h2>
+  <p><%= @user.bio %></p>
+  <p><%= link_to "Edit Profile", edit_user_path if logged_in? && owns_profile?(@user)%></p>
 </div>
+
+<hr>
+<h2 class="center">Questions</h1>
+<% @user.questions.each do |question| %>
+  <table>
+    <tr>
+      <td class="q-stats">
+        <%= question.rating %><br>
+        votes
+      </td>
+      <td class="q-info">
+        <%= link_to question.title, question_path(question) %>
+        <sub>asked <%= question.timestamp %> ago</sub>
+      </td>
+    </tr>
+  </table>
+<% end %>
+
+<hr>
+<h2 class="center">Answers</h1>
+<% @user.answers.each do |answer| %>
+  <table>
+    <tr>
+      <td class="q-stats">
+        <%= answer.rating %><br>
+        votes
+      </td>
+      <td class="q-info">
+        <%= link_to answer.question.title, question_path(answer.question) %>
+        <sub>Posted <%= answer.timestamp %> ago</sub>
+      </td>
+    </tr>
+  </table>
+<% end %>
 
