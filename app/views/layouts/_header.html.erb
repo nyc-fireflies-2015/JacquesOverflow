@@ -7,7 +7,7 @@
         <div id="word-2"><%= link_to image_tag("logo-word-2.png") %></div>
     </div>  
   <% end %>
-  <nav>
+  <nav class="header-nav">
     <%= link_to "Questions", root_path %>
     <%= link_to "Ask a Question", new_question_path %>
     <% if logged_in? %>

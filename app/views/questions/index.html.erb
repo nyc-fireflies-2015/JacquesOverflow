@@ -1,8 +1,10 @@
-<h1 class="title">Questions</h1>
+<h1 class="q-header title">Questions</h1>
 
-<%= link_to "Recent", recent_path, class: "sub-button" %>
-<%= link_to "Popular", trending_path, class: "sub-button" %>
-<%= link_to "Trending", votes_path, class: "sub-button" %>
+	<nav class="question-links">
+		<%= link_to "Recent", recent_path, class: "sub-button" %>
+		<%= link_to "Popular", trending_path, class: "sub-button" %>
+		<%= link_to "Trending", votes_path, class: "sub-button" %>
+	</nav>
 
 <hr>
 
@@ -10,7 +12,8 @@
   <table>
     <tr>
       <td class="rating">
-        <%= question.rating %> Rating
+        <p><%= question.rating %></p>
+        <p class>votes</p>
       </td>
       <td>
         <p class="q-title"><%= link_to question.title, question_path(question) %></p>
