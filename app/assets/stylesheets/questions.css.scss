@@ -11,11 +11,6 @@
 	font-size: 14pt;
 }
 
-td.rating {
-  border-right: 1px solid #999;
-  width: 4em;
-}
-
 .vote {
   width: 6em;
   height: 6em;
@@ -24,7 +19,7 @@ td.rating {
 .sub-vote {
   width: 3em;
   height: 3em;
-}  
+}
 
 .vote-buttons img {
   height: 4em;
@@ -58,15 +53,24 @@ table {
 		border: none;
 	}
 
-	.rating p {
+  .q-info {
+    width: 100%
+  }
+
+	.q-stats p {
 		font-weight: bold;
 		margin: 0;
 		text-align: center;
 	}
 
-  .rating {
-    font-weight: bold;
+  .q-stats {
+    color: #999;
+    font-size: 0.9em;
     margin: 0;
     text-align: center;
+  }
+
+  sub {
+    float: right;
   }
 }

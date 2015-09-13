@@ -11,13 +11,17 @@
 <% @questions.each do |question| %>
 <table>
 	<tr>
-		<td class="rating">
-			<p><%= question.rating %></p>
-			<p class>votes</p>
+		<td class="q-stats">
+      <%= question.answers.count %><br>
+      answers
 		</td>
+    <td class="q-stats">
+      <%= question.rating %><br>
+      votes
+    </td>
 		<td>
 			<p class="q-title"><%= link_to question.title, question_path(question) %></p>
-			<p><%= question.content %></p>
+			<p class="q-content"><%= question.content %></p>
 			<%= image_tag(question.submitter.avatar_url, class: "icon") %> <sub>asked <%= question.timestamp %> ago <%= link_to "#{question.submitter.username}", profile_path(question.submitter) %></sub>
 		</td>
 	</tr>
