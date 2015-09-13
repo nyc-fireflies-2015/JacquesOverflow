@@ -31,6 +31,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'validates_email_format_of'
 gem 'faker'
 gem 'rails_12factor'
+gem 'simplecov', :require => false, :group => :test
 
 group :test, :development do
 	gem 'pry'
