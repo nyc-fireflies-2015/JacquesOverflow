@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params.merge(avatar_url: "http://wiseheartdesign.com/images/articles/default-avatar.png", bio: "Cet utilisateur aime à etre mystérieux"))
+    user = User.new(user_params.merge(avatar_url: "http://wiseheartdesign.com/images/articles/default-avatar.png", bio: "Cet utilisateur aime a etre mysterieux"))
     if user.save
       log_in(user)
       redirect_to root_path, notice: "Account Has Created!!"
