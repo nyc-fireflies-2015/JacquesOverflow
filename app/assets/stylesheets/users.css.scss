@@ -2,28 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#user-profile {
-  width: 80%;
-}
-
 .avatar {
   float: left;
-  width: 250px;
+  width: 16em;
   margin-bottom: 10px;
-}
-
-.user-stats {
-  width: 250px;
-  float: right;
-}
-
-.user-stats h1 {
-  margin-left: 38px
-}
-
-.user-bio {
-  float: left;
-  margin-left: 200px;
+  border: 1px solid #999;
 }
 
 .number {
@@ -31,14 +14,16 @@
   font-weight: bold;
 }
 
-.user-stats ul {
-  list-style: none;
+.profile {
+  ul {
+    list-style: none;
+  }
+
+  td {
+    margin: 0 5em 0 5em;
+  }
 }
 
 
-.user-activity {
-  clear: both;
-  width: 80%;
-}
 
 
