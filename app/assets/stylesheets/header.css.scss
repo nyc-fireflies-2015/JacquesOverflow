@@ -38,25 +38,17 @@ header {
 }
 
 
-
-.logo {
-  font-size: 2.3em;
-  font-family: 'Oswald', sans-serif;
-  border: none;
-}
-
 nav {
   position: absolute;
-  top: 2.5em;
-  right: 1em;
-}
+  top: 3.5em;
+  right: 3em;
 
-.button {
-  padding: 0.5em;
-  background: #999;
-  border-radius: 0.3em;
-}
-
-a.button:hover {
-  color: #E6FFE6;
+  a {
+    background-color: #858d93;
+    padding: 4px 10px 5px;
+    margin: 0.15em;
+    color: white !important;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 14pt;
+  }
 }
