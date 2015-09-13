@@ -36,7 +36,11 @@ sub {
 .sub-button {
   border: #999 solid 1px;
   padding: 0 0.3em;
-  font-size: 1.2em;
+  font-size: 1.1em;
+}
+
+a.sub-button {
+  color: #999;
 }
 
 .icon {
