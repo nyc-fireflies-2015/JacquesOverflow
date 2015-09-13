@@ -17,20 +17,6 @@ RSpec.describe QuestionsController, type: :controller do
     end  
   end
 
-  describe "GET #votes" do 
-    it "displays questions by number of votes" do 
-      get :index
-      expect(assigns(:questions)).to eq(Question.order_by_votes)
-    end  
-  end
-
-  describe "GET #trending" do 
-      it "displays questions by number of votes per hour" do 
-      get :index
-      expect(assigns(:questions)).to eq(Question.order_by_trending)
-    end  
-  end
-
   describe "GET #show" do
     it "renders the :show view" do
       get :show, id: question
@@ -79,7 +65,7 @@ RSpec.describe QuestionsController, type: :controller do
 
     context "invalid attributes" do
       it "doesn't create a post with invalid attributes" do
-        log_in(user)
+        log_in(FactoryGirl.create(:user))
         question_attributes = { title: "Title", content: nil }
         post :create, question: question_attributes
         expect(response).to redirect_to new_question_path
