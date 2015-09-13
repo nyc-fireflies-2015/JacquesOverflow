@@ -2,30 +2,38 @@
   <tr>
     <td>
       <% if logged_in? && current_user.authorized_to_vote_on_answer?(answer)%>
-        <div class="upvote">
-          <%=form_for @vote, url: answer_votes_path(answer) do |f| %>
-          <%= f.hidden_field :value, value: 1 %>
-          <%= f.submit 'UpVote', type: :image, src: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-media/003363-glossy-black-icon-media-media2-arrow-up.png", class: "sub-vote" %>
-          <%end%>
-        </div>
-      <% end %>
-      <div class="center"><%= answer.rating %></div>
-      <% if logged_in? && current_user.authorized_to_vote_on_answer?(answer)%>
-        <div class='downvote'>
-          <%=form_for @vote, url: answer_votes_path(answer) do |f| %>
-          <%= f.hidden_field :value, value: -1 %>
-          <%= f.submit 'DownVote', type: :image, src: "http://cdn.mysitemyway.com/etc-mysitemyway/icons/legacy-previews/icons/glossy-black-icons-media/003362-glossy-black-icon-media-media2-arrow-down.png", class: "sub-vote" %>
-          <%end%>
-        </div>
-      <% end %>
-    </td>
-    <td>
-      <%= link_to answer.responder.username, profile_path(answer.responder) %>: <%=answer.content %>
-    </td>
-  </tr>
-</table>
+      <div class="upvote">
+        <%=form_for @vote, url: answer_votes_path(answer) do |f| %>
+        <%= f.hidden_field :value, value: 1 %>
+        <%= image_submit_tag("up-arrow.png", class: "answer-vote") %>
+        <%end%>
+      </div>
 
-<% if logged_in? && current_user.posted_answer?(answer) %>
+      <div class="center"><%= answer.rating %></div>
+
+      <div class='downvote'>
+        <%=form_for @vote, url: answer_votes_path(answer) do |f| %>
+        <%= f.hidden_field :value, value: -1 %>
+        <%= image_submit_tag("down-arrow.png", class: "answer-vote") %>
+        <%end%>
+      </div>
+      <% end %>
+      
+      <div class="answer-vote-buttons">  
+        <% if !logged_in? || !current_user.authorized_to_vote_on_answer?(answer) %>
+        <%= link_to image_tag("up-arrow.png"), class: "answer-vote" %>
+        <div class="center"><%= answer.rating %></div>
+
+        <%= link_to image_tag("down-arrow.png"), class: "answer-vote" %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to answer.responder.username, profile_path(answer.responder) %>: <%=answer.content %>
+      </td>
+    </tr>
+  </table>
+
+  <% if logged_in? && current_user.posted_answer?(answer) %>
   <div class="answer-edit">
     <%= link_to "Edit answer", edit_question_answer_path(@question, answer) %>
   </div>
@@ -35,11 +43,11 @@
     <%= f.submit 'Delete answer' %>
     <%end%>
   </div>
-<%end%>
+  <%end%>
 
-<ul class="answer-comments-list">
-  <%= render partial:"comments/answer_comment", collection:answer.comments, as: :comment, locals: {answer: answer} %>
-  <% if logged_in? %>
+  <ul class="answer-comments-list">
+    <%= render partial:"comments/answer_comment", collection:answer.comments, as: :comment, locals: {answer: answer} %>
+    <% if logged_in? %>
     <%= render partial:"comments/answer_new", object: @comment, locals: {answer: answer} %>
-  <% end %>
-</ul>
+    <% end %>
+  </ul>
