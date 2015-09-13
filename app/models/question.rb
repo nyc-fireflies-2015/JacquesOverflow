@@ -13,6 +13,10 @@ class Question < ActiveRecord::Base
 		votes.pluck(:value).reduce(:+) || 0
 	end
 
+	def has_best_answer?
+		best_answer_id
+	end	
+
 	def votes_per_hour
 		votes.select {|vote| vote.created_at < 1.hour.ago}.count
 	end
