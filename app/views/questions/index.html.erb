@@ -19,10 +19,10 @@
       <%= question.rating %><br>
       votes
     </td>
-		<td>
+		<td class="q-info">
 			<p class="q-title"><%= link_to question.title, question_path(question) %></p>
-			<p class="q-content"><%= question.content %></p>
-			<%= image_tag(question.submitter.avatar_url, class: "icon") %> <sub>asked <%= question.timestamp %> ago <%= link_to "#{question.submitter.username}", profile_path(question.submitter) %></sub>
+			<p><%= question.content %></p>
+			<sub>asked <%= question.timestamp %> ago <%= link_to "#{question.submitter.username}", profile_path(question.submitter) %></sub>
 		</td>
 	</tr>
 </table>
