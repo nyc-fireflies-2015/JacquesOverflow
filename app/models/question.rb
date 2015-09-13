@@ -11,5 +11,40 @@ class Question < ActiveRecord::Base
 
 	def rating
 		votes.pluck(:value).reduce(:+) || 0
-	end	
+	end
+
+	def votes_per_hour
+		votes.select {|vote| vote.created_at < 1.hour.ago}.count
+	end
+
+	def self.order_by_recent
+		self.order(created_at: :desc)
+	end
+
+	def self.order_by_trending
+		self.all.sort {|q1, q2| q2.votes_per_hour <=> q1.votes_per_hour}
+	end
+
+	def self.order_by_votes
+		self.all.sort {|q1, q2| q2.rating <=> q1.rating}
+	end
+
+	def timestamp
+		milliseconds = self.created_at.to_i/1000
+		seconds = milliseconds/1000
+		minutes = seconds/60
+		hours = minutes/60
+		days = hours/24
+
+		if minutes == 0
+			return "#{seconds} seconds"
+		elsif hours == 0
+			return "#{minutes} minutes"
+		elsif days == 0
+			return "#{hours} hours"
+		else
+			return "#{days} days"
+		end
+	end
+
 end

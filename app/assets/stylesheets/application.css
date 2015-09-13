@@ -14,17 +14,50 @@
  *= require_self
  */
 
+main {
+  padding: 0 2em;
+ }
+
 a, a:visited {
   text-decoration: none;
   color: #99CCFF;
   border-bottom: dashed #999 1px;
 }
 
-h1 {
+h1, h3 {
   color: #999;
   font-family: 'Open Sans Condensed', sans-serif;
 }
 
 hr {
   color: #999;
+}
+
+sub {
+  color: #999;
+}
+
+.sub-button {
+  border: #999 solid 1px;
+  padding: 0 0.3em;
+  font-size: 1.1em;
+}
+
+a.sub-button {
+  color: #999;
+}
+
+.icon {
+  width: 2em;
+  height: 2em;
+  border: 1px solid #999;
+}
+
+td {
+  padding: 0.5em;
+}
+
+.center {
+  text-align: center;
+  margin: auto;
 }

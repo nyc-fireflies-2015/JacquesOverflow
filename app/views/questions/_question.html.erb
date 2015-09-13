@@ -1,25 +1,43 @@
 <h1 class="title"><%= question.title %></h1>
-<h3 class="subtitle">Posted by <%=question.submitter.username%> </h3>
-<p class="question-content"><%= question.content %></p>
+<%= image_tag question.submitter.avatar_url, class: "icon" %>
+<sub class="subtitle">Posted by <%= link_to question.submitter.username, profile_path(question.submitter) %></sub>
 
-<% if logged_in? && current_user.posted_question?(question) %>
-<%= link_to "Edit Question", edit_question_path %>
-<%= link_to "Delete Question", question_path(question), method: :delete %>
-<% end %>	
+<table>
+  <tr>
+    <td>
+      <% if logged_in? && current_user.posted_question?(question) %>
+        <%= link_to "Edit Question", edit_question_path %>
+        <%= link_to "Delete Question", question_path(question), method: :delete %>
+      <% end %>
 
-<p class="rating">Rating: <%=question.rating%></p>
+      <% if logged_in? && current_user.authorized_to_vote_on_question?(question) %>
+        <div class='upvote'>
+          <%= form_for @vote, url: question_votes_path(question) do |f| %>
+            <%= f.hidden_field :value, value: 1 %>
+          	<%= image_submit_tag("up-arrow.png", class: "vote") %>
+          <% end %>
+        </div>
 
-<% if logged_in? && current_user.authorized_to_vote_on_question?(question) %>
-<div class='upvote'>
-	<%= form_for @vote, url: question_votes_path(question) do |f| %>
-	<%= f.hidden_field :value, value: 1 %>
-	<%= f.submit  value: 'UpVote' %>
-	<% end %>
-</div>
-<div class='downvote'>
-	<%= form_for @vote, url: question_votes_path(question) do |f| %>
-	<%= f.hidden_field :value, value: -1 %>
-	<%= f.submit  value: 'DownVote' %>
-	<% end %>
-</div>
-<% end %>
+         <p class="rating"><%=question.rating%> votes</p>
+
+        <div class='downvote'>
+        	<%= form_for @vote, url: question_votes_path(question) do |f| %>
+        	<%= f.hidden_field :value, value: -1 %>
+        	<%= image_submit_tag("down-arrow.png", class: "vote") %>
+        	<% end %>
+        </div>
+      <% end %>
+
+    <div class="vote-buttons">  
+      <% if !logged_in? || !current_user.authorized_to_vote_on_question?(question) %>
+        <%= link_to image_tag("up-arrow.png"), class: "vote" %>
+        <p class="rating"><%=question.rating%> votes</p>
+        <%= link_to image_tag("down-arrow.png"), class: "vote" %>
+      <% end %>
+     </div> 
+    </td>
+    <td>
+      <p class="question-content"><%= question.content %></p>
+    </td>
+  </tr>
+</table>

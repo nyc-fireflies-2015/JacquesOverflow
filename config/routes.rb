@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     resources :votes, only: [:destroy, :create]
   end  
 
+  get '/trending' => 'questions#trending'
+  get '/votes' => 'questions#votes'
+  get '/recent' => 'questions#index'
+
   resources :answers, only: [:show] do 
     resources :comments, only: [:create, :destroy]
     resources :votes, only: [:destroy, :create]

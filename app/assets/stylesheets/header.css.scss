@@ -1,31 +1,65 @@
 header {
-  height: 3em;
-  border-bottom: #999 solid 1px;
+  height: 4em;
   padding: 1em;
+  margin-left: 4em;
+  margin-right: 8em;
 
-  a {
+  #logo a {
     color: #EBEBEB;
+    border: none;
+  }
+
+  #logo a:visited {
+    border: none;
+  }
+
+  #logo {
+    float: left;
+  }
+
+  #logo div {
+    display: block;
+    float: left;
+  }
+
+  #so-img img {
+    height: 5em;
+  }
+
+  #word-1 img {
+    padding-top: 1.5em;
+    margin-left: -0.5em;
+    height: 3em;
+  }
+
+  #word-2 img {
+    height: 3em;
+    padding-top: 1.6em;
+    margin-left: -0.25em;
   }
 }
 
-.logo {
-  font-size: 2.3em;
-  font-family: 'Oswald', sans-serif;
-  border: none;
-}
-
-nav {
+.header-nav {
   position: absolute;
-  top: 2.5em;
-  right: 1em;
+  top: 3.5em;
+  right: 7em;
+
+  a {
+    background-color: #858d93;
+    padding: 4px 10px 5px;
+    margin: 0.15em;
+    color: white !important;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 14pt;
+  }
+
+  a:hover {
+    background-color: #FF9500;
+    border: none;
+  }
 }
 
-.button {
-  padding: 0.5em;
-  background: #999;
-  border-radius: 0.3em;
+.content {
+  margin: 5em 12em 3em 12em;
 }
 
-a.button:hover {
-  color: #E6FFE6;
-}
