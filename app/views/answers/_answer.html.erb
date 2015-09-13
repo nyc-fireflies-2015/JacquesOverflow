@@ -18,8 +18,8 @@
         <%end%>
       </div>
       <% else %>
-      
-      <div class="answer-vote-buttons">  
+
+      <div class="answer-vote-buttons">
         <%= link_to image_tag("up-arrow.png"), class: "answer-vote" %>
         <div class="center"><%= answer.rating %></div>
 
@@ -43,7 +43,7 @@
       <%= f.hidden_field :best_answer, value: true %>
       <%= f.submit "Choose as best answer" %>
       <% end %>
-    </div>  
+    </div>
   <% end %>
 
   <% if logged_in? && current_user.posted_answer?(answer) %>

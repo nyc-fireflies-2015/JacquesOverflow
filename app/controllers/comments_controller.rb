@@ -20,13 +20,6 @@ class CommentsController < ApplicationController
         redirect_to question_path(@question), flash: {error: "Comment must be 1500 chars or less." }
       end
     end
-
-    # if comment.save && request.xhr?
-    #   :render partial:'questions/question_comments', object: comment, layout: false
-    #   # redirect_to question_path(@question)
-    # else
-    #   redirect_to question_path(@question), flash: {error: "Comment must be 1500 chars or less." }
-    # end
   end
 
   def destroy
