@@ -1,6 +1,20 @@
+<%= link_to "Recent", recent_path, class: "sub-button" %>
+<%= link_to "Popular", trending_path, class: "sub-button" %>
+<%= link_to "Trending", votes_path, class: "sub-button" %>
+
 <% @questions.each do |question| %>
-  <%= link_to question.title, question_path(question) %>
-  <p><%= question.content %></p>
+  <table>
+    <tr>
+      <td class="rating">
+        <%= question.rating %> Rating
+      </td>
+      <td>
+        <p><%= link_to question.title, question_path(question) %></p>
+        <p><%= question.content %></p>
+        <%= image_tag(question.submitter.avatar_url, class: "icon") %> <sub>asked <%= question.timestamp %> ago <%= question.submitter.username%></sub>
+      </td>
+    </tr>
+  </table>
   <hr>
 <% end %>
 
