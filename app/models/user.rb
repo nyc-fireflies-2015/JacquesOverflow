@@ -59,4 +59,10 @@ class User < ActiveRecord::Base
 			return "#{days} days"
 		end
 	end
+
+	def reputation
+		questions_rating = 5 * (self.questions.inject(0) {|sum, q| sum + q.rating})
+		answers_rating = 10 * (self.answers.inject(0) {|sum, a| sum + a.rating})
+		return questions_rating + answers_rating
+	end
 end
