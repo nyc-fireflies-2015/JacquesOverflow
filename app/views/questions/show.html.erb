@@ -1,22 +1,24 @@
-<%= render @question %>
+<main>
+  <%= render @question %>
 
-<h3 class="subtitle">Comments</h3>
+  <h3 class="subtitle">Comments</h3>
 
-<ul class="question-comments-list">
-  <%= render @comments %>
-</ul>  
-
-<% if logged_in? %>
-  <%= render partial:"comments/new", object: @comment %>
-<% end %>
-
-<div class="answers">
-  <h3 class="subtitle">Answers</h3>
-  <ul class="answer-list">
-    <%= render @answers %>    
+  <ul class="question-comments-list">
+    <%= render @comments %>
   </ul>
-</div>
 
-<% if logged_in? %>
-  <%= render partial:"answers/new", object: @answer %>
-<% end %>
+  <% if logged_in? %>
+    <%= render partial:"comments/new", object: @comment %>
+  <% end %>
+
+  <div class="answers">
+    <h3 class="subtitle">Answers</h3>
+    <ul class="answer-list">
+      <%= render @answers %>
+    </ul>
+  </div>
+
+  <% if logged_in? %>
+    <%= render partial:"answers/new", object: @answer %>
+  <% end %>
+</main>
