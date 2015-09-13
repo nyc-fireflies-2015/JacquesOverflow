@@ -27,6 +27,12 @@ td.rating {
   height: 3em;
 }  
 
+.vote-buttons img {
+  height: 4em;
+  width: 4em;
+  margin: 0;
+}
+
 .question-links {
 	float: right;
 	margin-top: -2em;
@@ -58,4 +64,10 @@ table {
 		margin: 0;
 		text-align: center;
 	}
+
+  .rating {
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+  }
 }
