@@ -86,12 +86,15 @@ RSpec.describe User, type: :model do
 			answer.votes.create(value: 1, voter: user)
 			expect(user.authorized_to_vote_on_answer?(answer)).to be_falsey
 		end	
-	end	
-
-	describe '#timestamp' do 
 	end
-	
-	describe "#reputation" do 
-	end	
 
+	describe '#reputation' do 
+		it 'should return 75 if user has posted one question and one answer each with a rating of 5' do 
+			answer = user.answers.create(FactoryGirl.attributes_for(:answer))
+			question = user.questions.create(FactoryGirl.attributes_for(:question))
+			5.times {answer.votes.create(value:1, voter: FactoryGirl.create(:user))}
+			5.times {question.votes.create(value:1, voter: FactoryGirl.create(:user))}
+			expect(user.reputation).to eq(75)
+		end
+	end	
 end
