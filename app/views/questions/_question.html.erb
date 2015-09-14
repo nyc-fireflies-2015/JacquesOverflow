@@ -1,8 +1,6 @@
-<h1 class="title"><%= question.title %></h1>
+<h1><%= question.title %></h1>
 <%= image_tag question.submitter.avatar_url, class: "icon" %>
-<sub class="subtitle">
-  Posted by <%= link_to question.submitter.username, profile_path(question.submitter) %>
-</sub>
+Posted by <%= link_to question.submitter.username, profile_path(question.submitter) %>
 
 <table>
   <tr>
@@ -32,7 +30,7 @@
 
     <div class="vote-buttons">
         <%= link_to image_tag("up-arrow.png"), class: "vote" %>
-        <p class="rating"><%=question.rating%> votes</p>
+        <div class="rating"><%=question.rating%> votes</div>
         <%= link_to image_tag("down-arrow.png"), class: "vote" %>
       <% end %>
      </div>

@@ -1,8 +1,3 @@
-.title {
-	font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
-	font-size: 20pt;
-}
-
 .q-header {
 	margin-bottom: 0;
 }
@@ -11,9 +6,15 @@
 	font-size: 14pt;
 }
 
+.icon {
+  width: 3em;
+  height: 3em;
+  border: 1px solid #999;
+}
+
 .vote {
-  width: 6em;
-  height: 6em;
+  width: 3em;
+  height: 3em;
 }
 
 .sub-vote {
