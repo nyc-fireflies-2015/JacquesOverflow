@@ -1,0 +1,13 @@
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+<%end%>
+
+<%if flash[:error] %>
+  <%= flash[:error]%>
+<%end%>
+
+<% if flash[:registration_error] %>
+  <% flash[:registration_error].each do |error| %>
+    <li><%= error %></li>
+  <%end%>
+<%end%>

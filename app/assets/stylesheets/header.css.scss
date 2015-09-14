@@ -1,0 +1,74 @@
+header {
+  height: 4em;
+  padding: 1em;
+  margin-left: 4em;
+  margin-right: 8em;
+
+  #logo a {
+    color: #EBEBEB;
+    border: none;
+  }
+
+  #logo a:visited {
+    border: none;
+  }
+
+  #logo {
+    float: left;
+  }
+
+  #logo div {
+    display: block;
+    float: left;
+  }
+
+  #so-img img {
+    height: 4em;
+  }
+
+  #word-1 img {
+    padding-top: 1.5em;
+    margin-left: -0.5em;
+    height: 2.5em;
+  }
+
+  #word-2 img {
+    height: 2.5em;
+    padding-top: 1.6em;
+    margin-left: -0.25em;
+  }
+}
+
+#search {
+  float: right;
+}
+
+.search-text {
+  width: 80%;
+}
+
+
+.header-nav {
+  position: absolute;
+  top: 3.5em;
+  right: 7em;
+
+  a {
+    background-color: #858d93;
+    padding: 4px 10px 5px;
+    margin: 0.15em;
+    color: white !important;
+    font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+    font-size: 14pt;
+  }
+
+  a:hover {
+    background-color: #FF9500;
+    border: none;
+  }
+}
+
+.content {
+  margin: 5em 12em 3em 12em;
+}
+

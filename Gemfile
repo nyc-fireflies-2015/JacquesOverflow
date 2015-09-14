@@ -31,8 +31,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'validates_email_format_of'
 gem 'faker'
 gem 'rails_12factor'
+gem 'simplecov', :require => false, :group => :test
 
-group :test, :development do 
+group :test, :development do
 	gem 'pry'
 	gem 'factory_girl_rails'
 	gem 'launchy'
@@ -40,7 +41,7 @@ group :test, :development do
 	gem 'capybara'
 	gem 'database_cleaner'
 	gem 'shoulda-matchers'
-end	
+end
 
 # Use unicorn as the app server
 # gem 'unicorn'

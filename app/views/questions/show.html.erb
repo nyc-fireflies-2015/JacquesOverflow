@@ -1,0 +1,21 @@
+<main>
+  <%= render @question %>
+
+  <ul class="question-comments-list">
+    <%= render @comments %>
+  </ul>
+
+  <% if logged_in? %>
+    <%= render partial:"comments/new", object: @comment %>
+  <% end %>
+
+  <div class="answers">
+    <h2 class="subtitle"><%= @question.answers.count %> Answers</h2>
+    <hr>
+    <%= render @answers %>
+  </div>
+
+  <% if logged_in? %>
+    <%= render partial:"answers/new", object: @answer %>
+  <% end %>
+</main>
