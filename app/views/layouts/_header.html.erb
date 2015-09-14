@@ -19,7 +19,7 @@
     <p>
       <%= form_for :question, url: search_path, method: "get", id: "search" do |f|%>
         <%= image_tag("searchicon.png") %>
-        <%= f.text_field :title, name: "search", placeholder: "search", class: "search-text"%>
+        <%= f.text_field :title, name: "search", placeholder: "search", class: "search-text", value: "" %>
       <% end %>
     <p>
   </nav>

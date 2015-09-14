@@ -1,7 +1,4 @@
 <h1><%= question.title %></h1>
-<%= image_tag question.submitter.avatar_url, class: "icon" %>
-Posted by <%= link_to question.submitter.username, profile_path(question.submitter) %>
-
 <table>
   <tr>
     <td>
@@ -40,3 +37,9 @@ Posted by <%= link_to question.submitter.username, profile_path(question.submitt
     </td>
   </tr>
 </table>
+
+<div class="submitter">
+  <%= image_tag question.submitter.avatar_url, class: "icon" %>
+  <%= link_to question.submitter.username, profile_path(question.submitter) %><br>
+  asked <%= question.timestamp %> ago
+</div>
