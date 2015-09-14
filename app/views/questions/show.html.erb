@@ -1,17 +1,17 @@
 <main>
   <%= render @question %>
 
-  <h3 class="subtitle">Comments</h3>
-    <ul class="question-comments-list">
-      <%= render @comments %>
-    </ul>
+  <ul class="question-comments-list">
+    <%= render @comments %>
+  </ul>
 
   <% if logged_in? %>
     <%= render partial:"comments/new", object: @comment %>
   <% end %>
 
   <div class="answers">
-    <h3 class="subtitle">Answers</h3>
+    <h2 class="subtitle"><%= @question.answers.count %> Answers</h2>
+    <hr>
     <%= render @answers %>
   </div>
 
